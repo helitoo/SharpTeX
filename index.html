@@ -5,27 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>#TeX Editor</title>
     <link rel="shortcut icon" href="../../img/icon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="../style/reset.css" />
-    <link rel="stylesheet" href="../style/index.css" />
-    <link rel="stylesheet" href="../style/floating_windows.css" />
-    <link rel="stylesheet" href="../style/dropdown_menu.css" />
+    <link rel="stylesheet" href="./src/style/reset.css" />
+    <link rel="stylesheet" href="./src/style/index.css" />
+    <link rel="stylesheet" href="./src/style/floating_windows.css" />
+    <link rel="stylesheet" href="./src/style/dropdown_menu.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="../script/sharptex_engine.js"></script>
-    <script src="../script/shortcuts.js"></script>
-    <script src="../script/dropdown_menu_engine.js"></script>
-    <script src="../script/find_n_replace_engine/open_find_n_replace.js"></script>
-    <script src="../script/find_n_replace_engine/find_n_replace.js"></script>
-    <script src="../script/action.js"></script>
-    <script src="../script/count_char_line.js"></script>
+    <script src="./src/script/sharptex_engine.js"></script>
+    <script src="./src/script/shortcuts.js"></script>
+    <script src="./src/script/dropdown_menu_engine.js"></script>
+    <script src="./src/script/find_n_replace_engine/open_find_n_replace.js"></script>
+    <script src="./src/script/find_n_replace_engine/find_n_replace.js"></script>
+    <script src="./src/script/action.js"></script>
+    <script src="./src/script/count_char_line.js"></script>
   </head>
   <body
     onclick="hindDropdown(event, 'titlepageDropdown'); hindDropdown(event, 'prefDropdown');"
   >
     <div class="toolbar">
       <div class="logo">
-        <a href=""
-          ><img src="../../img/icon.svg" alt="#TeX logo" width="59px"
-        /></a>
+        <a href=""><img src="./img/icon.svg" alt="#TeX logo" width="59px" /></a>
       </div>
       <div class="file-info">
         <input
@@ -140,7 +138,7 @@ $TP. Hồ Chí Minh, 03/2025
             id="documentButton"
             type="button"
             value="Hướng dẫn"
-            onclick="window.open('./document.html', '_blank')"
+            onclick="window.open('./src/page/document.html', '_blank')"
           />
           <span class="tooltip">[Ctrl D]</span>
         </div>
