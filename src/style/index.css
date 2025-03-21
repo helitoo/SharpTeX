@@ -1,0 +1,163 @@
+body {
+  background-color: #e8e8e8;
+}
+
+.toolbar {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 24px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  display: block;
+}
+
+.logo {
+  float: left;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.file-info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.file-info input {
+  background: transparent;
+  border: 0;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  margin-left: 2px;
+  border-radius: 5px;
+}
+
+.file-info #fileName {
+  width: 200px;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.file-info #fileDir {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.tool {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.tool input {
+  background: transparent;
+  border: 0;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.pageInfor {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pageInfor * {
+  padding: 0 5px;
+}
+
+.page {
+  width: 80%;
+  height: calc(100vh - 140px);
+  background: white;
+  display: block;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+textarea {
+  width: 90%;
+  height: 90%;
+  border: 0;
+  margin-left: auto;
+  margin-right: auto;
+  word-wrap: break-word;
+  text-align: justify;
+  display: block;
+  overflow: auto;
+  resize: none;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  white-space: nowrap;
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.noCopy {
+  user-select: none;
+}
+
+@media (max-width: 400px) {
+}
+
+.tooltipContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltipContainer .tooltip {
+  visibility: hidden;
+  background-color: rgb(107, 107, 107);
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateY(50%);
+  white-space: nowrap;
+  opacity: 0;
+  transition: 0.1s;
+}
+
+.tooltipContainer:hover .tooltip {
+  transition-delay: 0.3s;
+  visibility: visible;
+  opacity: 1;
+}
+
+input:hover {
+  background-color: #e8e8e8;
+  transform: translateY(-1.5px);
+  transition: 0.1s;
+}
+
+input:active {
+  background-color: #d0d0d0;
+  transform: scale(0.98);
+  transition: 0.1s;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  background-color: #d0d0d0;
+  transform: scale(0.98);
+}

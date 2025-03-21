@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>#TeX Editor</title>
+    <link rel="shortcut icon" href="../../img/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../style/reset.css" />
+    <link rel="stylesheet" href="../style/index.css" />
+    <link rel="stylesheet" href="../style/floating_windows.css" />
+    <link rel="stylesheet" href="../style/dropdown_menu.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="../script/sharptex_engine.js"></script>
+    <script src="../script/shortcuts.js"></script>
+    <script src="../script/dropdown_menu_engine.js"></script>
+    <script src="../script/find_n_replace_engine/open_find_n_replace.js"></script>
+    <script src="../script/find_n_replace_engine/find_n_replace.js"></script>
+    <script src="../script/action.js"></script>
+    <script src="../script/count_char_line.js"></script>
+  </head>
+  <body
+    onclick="hindDropdown(event, 'titlepageDropdown'); hindDropdown(event, 'prefDropdown');"
+  >
+    <div class="toolbar">
+      <div class="logo">
+        <a href=""
+          ><img src="../../img/icon.svg" alt="#TeX logo" width="59px"
+        /></a>
+      </div>
+      <div class="file-info">
+        <input
+          type="text"
+          name="fileName"
+          id="fileName"
+          value="Untitled_file.txt"
+        />
+      </div>
+      <div class="tool">
+        <div class="tooltipContainer">
+          <input id="importButton" type="button" value="Mở" />
+          <input type="file" name="input" id="input" style="display: none" />
+          <span class="tooltip">[Ctrl O]</span>
+        </div>
+        <div class="tooltipContainer">
+          <input id="saveButton" type="button" value="Lưu" />
+          <span class="tooltip">[Ctrl S]</span>
+        </div>
+        <div class="tooltipContainer">
+          <input id="exportButton" type="button" value="Xuất" />
+          <span class="tooltip">[Ctrl E] Chuyển file này thành tex và lưu</span>
+        </div>
+        <div class="tooltipContainer">
+          <input
+            id="titlepageButton"
+            type="button"
+            value="Chèn bìa"
+            onclick="hindDropdown(event); dropdown('titlepageDropdown');"
+          />
+          <span class="tooltip">Chèn trang bìa</span>
+          <div class="dropdownMenu" id="titlepageDropdown">
+            <a
+              href="#"
+              onclick="insertToBeginOfPage(`#titlepage-personal
+$ĐẠI HỌC QUỐC GIA TP. HCM\\\\TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN
+$school_logo.png
+$ĐỒ ÁN BÁO CÁO\\\\MÔN TRÍ TUỆ NHÂN TẠO
+$Nghiên cứu mô hình học sâu trong\\\\bài toán phát hiện vi phạm giao thông
+$ThS. Tên_giảng_viên
+$Tên_sinh_viên
+$MSSV
+$Mã_lớp
+$TP. Hồ Chí Minh, 03/2025
+#
+`)"
+              >Bìa cứng cá nhân</a
+            >
+            <a
+              href="#"
+              onclick="insertToBeginOfPage(`#titlepage-group
+$ĐẠI HỌC QUỐC GIA TP. HCM\\\\TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN
+$school_logo.png
+$ĐỒ ÁN BÁO CÁO\\\\MÔN TRÍ TUỆ NHÂN TẠO
+$Nghiên cứu mô hình học sâu trong\\\\bài toán phát hiện vi phạm giao thông
+$ThS. Tên_giảng_viên
+$Mã_lớp
+$Tên_nhóm_(nếu có)
+1.;SV_1;MSSV_1
+2.;SV_2;MSSV_2
+$TP. Hồ Chí Minh, 03/2025
+#
+`)"
+              >Bìa cứng nhóm</a
+            >
+          </div>
+        </div>
+        <div class="tooltipContainer">
+          <input
+            id="prefButton"
+            type="button"
+            value="Trích dẫn"
+            onclick="hindDropdown(event); dropdown('prefDropdown');"
+          />
+          <span class="tooltip">Thêm nguồn trích dẫn</span>
+          <div class="dropdownMenu" id="prefDropdown">
+            <a
+              href="#"
+              onclick="insertToEndOfPage('#book\n$Tác_giả\n$Tiêu_đề\n$Năm_xuất_bản\n$Nhà_xuất_bản\n#\n')"
+              >Sách</a
+            >
+            <a
+              href="#"
+              onclick="insertToEndOfPage('#webpage\n$Tác_giả\n$Tiêu_đề\n$Năm_xuất bản\n$Ngày_truy_cập\n$link\n#\n')"
+              >Trang web</a
+            >
+            <a
+              href="#"
+              onclick="insertToEndOfPage('#thesis\n$Tác_giả\n$Tiêu_đề\n$Năm_xuất_bản\n$mastersthesis hoặc phdthesis\n$Trường_đại_học\n#\n')"
+              >Luận văn</a
+            >
+          </div>
+        </div>
+        <div class="tooltipContainer">
+          <input id="testGenButton" type="button" value="Sinh đề" />
+          <span class="tooltip">[Ctrl T] Đang phát triển</span>
+        </div>
+        <div class="tooltipContainer">
+          <input id="aiButton" type="button" value="AI" />
+          <span class="tooltip">[Ctrl Shift A] Đang phát triển</span>
+        </div>
+        <div class="tooltipContainer">
+          <input id="findReplaceButton" type="button" value="Tìm & thay" />
+          <span class="tooltip">[Ctrl H]</span>
+        </div>
+        <div class="tooltipContainer">
+          <input id="settingsButton" type="button" value="Cài đặt" />
+          <span class="tooltip">[Ctrl Shift S] Đang phát triển</span>
+        </div>
+        <div class="tooltipContainer">
+          <input
+            id="documentButton"
+            type="button"
+            value="Hướng dẫn"
+            onclick="window.open('./document.html', '_blank')"
+          />
+          <span class="tooltip">[Ctrl D]</span>
+        </div>
+        <div id="findNReplace" class="floatingWindow">
+          <div class="header" id="findNReplaceHeader">
+            <p class="title" id="findNReplaceTitle">
+              <strong>Tìm kiếm & Thay thế</strong>
+            </p>
+            <input id="closeFindNReplace" type="button" value="X" />
+          </div>
+          <hr />
+          <div class="findContainer">
+            <label id="findLabel" for="find" class="noCopy">Tìm kiếm:</label>
+            <input type="text" name="find" id="find" />
+          </div>
+          <div class="replaceContainer">
+            <label id="replaceLabel" for="replace" class="noCopy"
+              >Thay =:</label
+            >
+            <input type="text" name="replace" id="replace" />
+          </div>
+          <div class="ignoreCaseContainer">
+            <label id="ignoreLabel" for="ignoreCase" class="noCopy"
+              >Phân biệt in hoa / thường:</label
+            >
+            <input type="checkbox" name="ignoreCase" id="ignoreCase" />
+          </div>
+          <hr />
+          <div class="confirmContainer">
+            <input type="button" value="Tìm kiếm" id="findButton" />
+            <input type="button" value="Thay tất cả" id="replaceAllButton" />
+            <input type="button" value="Thay từng lần" id="replaceOneButton" />
+            <input type="button" value="<" id="backButton" />
+            <input type="button" value=">" id="nextButton" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page">
+      <div class="pageInfor">
+        <p id="char" class="noCopy">0</p>
+        <p class="noCopy">ký tự.</p>
+        <p id="line" class="noCopy">1</p>
+        <p class="noCopy">dòng.</p>
+      </div>
+      <hr />
+      <textarea name="page" id="page" spellcheck="false"></textarea>
+    </div>
+  </body>
+</html>

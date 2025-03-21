@@ -1,0 +1,39 @@
+.floatingWindow {
+  display: none;
+  position: fixed;
+  width: 350px;
+  background: white;
+  padding: 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+#findNReplace > * {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+}
+
+#findNReplace > * * {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#findNReplaceTitle {
+  grid-column: 1/-1;
+}
+
+#closeFindNReplace {
+  grid-column: -1/-1;
+}
+
+#findNReplace input[type="text"] {
+  grid-column: 2/-1;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+#ignoreLabel {
+  grid-column: 1/5;
+}
