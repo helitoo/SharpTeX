@@ -25,19 +25,6 @@ document.addEventListener("keydown", function (event) {
         event.preventDefault();
         document.getElementById("documentButton").click();
         break;
-      default:
-        if (event.shiftKey) {
-          switch (event.key) {
-            case "a":
-              event.preventDefault();
-              document.getElementById("aiButton").click();
-              break;
-            case "s":
-              event.preventDefault();
-              document.getElementById("settingsButton").click();
-              break;
-          }
-        }
     }
   }
 });

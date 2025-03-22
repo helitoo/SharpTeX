@@ -32,19 +32,19 @@ function replaceSymbolsHashtag(content) {
 }
 
 function replaceLayoutHashtag(content) {
-  content = content.replace(/#uh\s+(.*)/gu, (match, content) => {
+  content = content.replace(/#uh\s+(.*)#/gu, (match, content) => {
     return `\\uncountSection{${content}}`;
   });
 
-  content = content.replace(/#h1\s+(.*)/gu, (match, content) => {
+  content = content.replace(/#h1\s+(.*)#/gu, (match, content) => {
     return `\\heading{${content}}`;
   });
 
-  content = content.replace(/#h2\s+(.*)/gu, (match, content) => {
+  content = content.replace(/#h2\s+(.*)#/gu, (match, content) => {
     return `\\subheading{${content}}`;
   });
 
-  content = content.replace(/#h3\s+(.*)/gu, (match, content) => {
+  content = content.replace(/#h3\s+(.*)#/gu, (match, content) => {
     return `\\subsubheading{${content}}`;
   });
 
@@ -176,52 +176,50 @@ function replaceListHashtag(content) {
 }
 
 function replaceTableHashtag(content) {
-  content = content.replace(/#tb\s*\n(.*?)\n#/gsu, (match, content) => {
-    // Make header
+  function getTable(match, content, caption) {
+    // Make declaration
     let lines = content.split("\n");
-    let result = "\\begin{table}[H]\n\\centering\n\\begin{tabular}{";
+    let result =
+      "\\begin{table}[H]\n\\centering\n\\begin{tabularx}{\\textwidth}{|";
     for (let i = 0; i < lines[0].split(";").length; i++) {
-      result += "c|";
+      result += "X|";
     }
     result += "}\n\\hline\n";
 
+    // Make header
+    let headerCells = lines[0].split(";");
+    let l = headerCells.length;
+    for (let i = 0; i < l; i++) {
+      if (i == 0) {
+        result += `\\multicolumn{1}{|c|}{\\textbf{${headerCells[i]}}}`;
+      } else {
+        result += `&\\multicolumn{1}{c|}{\\textbf{${headerCells[i]}}}`;
+      }
+    }
+    result += "\\\\\n\\hline\n";
+
     // Make body
-    for (let line of lines) {
-      let cells = line.split(";");
-      result += cells.join("&");
-      result += "\\\\\n\\hline\n";
+    l = lines.length;
+    for (let i = 1; i < l; i++) {
+      result += lines[i].split(";").join("&") + "\\\\\n\\hline\n";
     }
 
     // Make footer
-    result += "\\end{tabular}\n\\end{table}";
+    result += `\\end{tabularx}\n${caption}\\end{table}`;
 
     return result;
-  });
+  }
+
+  content = content.replace(/#tb\s*\n(.*?)\n#/gsu, (match, content) =>
+    getTable(match, content, "")
+  );
 
   content = content.replace(
     /#tb\s*\n(.*?)\n\$(.*?)\n?#/gsu,
-    (match, content, caption) => {
-      // Make header
-      let lines = content.split("\n");
-      let result = "\\begin{table}[H]\n\\centering\n\\begin{tabular}{";
-      for (let i = 0; i < lines[0].split(";").length; i++) {
-        result += "c|";
-      }
-      result += "}\n\\hline\n";
-
-      // Make body
-      for (let line of lines) {
-        let cells = line.split(";");
-        result += cells.join("&");
-        result += "\\\\\n\\hline\n";
-      }
-
-      // Make footer
-      result += `\\end{tabular}\n\\caption[${caption}]{${caption}}\n\\end{table}`;
-
-      return result;
-    }
+    (match, content, caption) =>
+      getTable(match, content, `\\caption[${caption}]{${caption}}\n`)
   );
+
   return content;
 }
 

@@ -15,68 +15,60 @@ document.addEventListener("DOMContentLoaded", () => {
   // Event import file
   //==========================
   importButton.addEventListener("click", () => {
-    try {
-      const inputFile = document.getElementById("input");
+    const inputFile = document.getElementById("input");
 
-      // activate input file type
-      inputFile.click();
+    // activate input file type
+    inputFile.click();
 
-      inputFile.addEventListener("change", (event) => {
-        // get the first file of files which was choosen by user
-        const file = event.target.files[0];
-        if (!file) return;
+    inputFile.addEventListener("change", (event) => {
+      // get the first file of files which was choosen by user
+      const file = event.target.files[0];
+      if (!file) return;
 
-        // set fileName
-        fileName.value = file.name;
+      // set fileName
+      fileName.value = file.name;
 
-        // set contain
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          page.value = e.target.result;
-          // Activate event input to count char and line
-          page.dispatchEvent(new Event("input"));
-        };
+      // set contain
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        page.value = e.target.result;
+        // Activate event input to count char and line
+        page.dispatchEvent(new Event("input"));
+      };
 
-        reader.readAsText(file);
-      });
-    } catch (error) {
-      alert("Error: " + error);
-    }
-
-    //==========================
-    // Event save file
-    //==========================
-    saveButton.addEventListener("click", async () => {
-      if (window.showSaveFilePicker) {
-        try {
-          const fileHandle = await window.showSaveFilePicker({
-            suggestedName: fileName.value,
-          });
-
-          const writable = await fileHandle.createWritable();
-          await writable.write(page.value);
-          await writable.close();
-        } catch (error) {
-          alert("Error: " + error);
-        }
-      } else {
-        const blob = new Blob([page.value], { type: "text/plain" });
-        const url = URL.createObjectURL(blob);
-
-        // Create a temporary link to download zip file
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = fileName.value;
-        document.body.appendChild(a);
-
-        // Click on the link
-        a.click();
-
-        // Remove the link from the page
-        URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-      }
+      reader.readAsText(file);
     });
+  });
+
+  //==========================
+  // Event save file
+  //==========================
+  saveButton.addEventListener("click", async () => {
+    if (window.showSaveFilePicker) {
+      const fileHandle = await window.showSaveFilePicker({
+        suggestedName: fileName.value,
+      });
+
+      const writable = await fileHandle.createWritable();
+      await writable.write(page.value);
+      await writable.close();
+    } else {
+      const blob = new Blob([page.value], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+
+      // Create a temporary link to download zip file
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = fileName.value;
+      document.body.appendChild(a);
+
+      // Click on the link
+      a.click();
+
+      // Remove the link from the page
+      URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    }
   });
 
   //==========================
@@ -117,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
       giftFolder.file(
         "set-up-page.cls",
         `
+
 \\NeedsTeXFormat{LaTeX2e}
 
 \\LoadClass[12pt, a4paper, fleqn]{article}
@@ -138,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
 \\usepackage{caption}
 \\usepackage{float}
 \\usepackage{fancyhdr}
+\\usepackage{tabularx}
 
 \\usepackage{indentfirst}
 \\setlength{\\parindent}{1cm}
@@ -202,7 +196,6 @@ document.addEventListener("DOMContentLoaded", () => {
     \\begingroup
     \\uncountSection{MỤC LỤC}
     \\renewcommand{\\contentsname}{}
-    \\renewcommand{\\cfttoctitlefont}{}
     \\thispagestyle{empty}
     \\parindent 0pt
     \\@starttoc{toc}
@@ -248,6 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
 \\renewcommand{\\tablename}{\\fontsize{12pt}{0pt}\\selectfont \\bfseries Bảng}
 \\renewcommand{\\thetable}{\\thesection.\\arabic{table}}
 \\captionsetup[table]{labelsep=space}
+
 ` + titlepageContent
       );
 
