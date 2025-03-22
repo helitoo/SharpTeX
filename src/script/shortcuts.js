@@ -13,10 +13,6 @@ document.addEventListener("keydown", function (event) {
         event.preventDefault();
         document.getElementById("exportButton").click();
         break;
-      case "p":
-        event.preventDefault();
-        document.getElementById("prefButton").click();
-        break;
       case "h":
         event.preventDefault();
         document.getElementById("findReplaceButton").click();
