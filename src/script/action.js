@@ -47,16 +47,34 @@ document.addEventListener("DOMContentLoaded", () => {
     // Event save file
     //==========================
     saveButton.addEventListener("click", async () => {
-      try {
-        const fileHandle = await window.showSaveFilePicker({
-          suggestedName: fileName.value,
-        });
+      if (window.showSaveFilePicker) {
+        try {
+          const fileHandle = await window.showSaveFilePicker({
+            suggestedName: fileName.value,
+          });
 
-        const writable = await fileHandle.createWritable();
-        await writable.write(page.value);
-        await writable.close();
-      } catch (error) {
-        alert("Error: " + error);
+          const writable = await fileHandle.createWritable();
+          await writable.write(page.value);
+          await writable.close();
+        } catch (error) {
+          alert("Error: " + error);
+        }
+      } else {
+        const blob = new Blob([page.value], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+
+        // Create a temporary link to download zip file
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = fileName.value;
+        document.body.appendChild(a);
+
+        // Click on the link
+        a.click();
+
+        // Remove the link from the page
+        URL.revokeObjectURL(url);
+        document.body.removeChild(a);
       }
     });
   });
@@ -75,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let zip = new JSZip();
 
       // Create subfiles in zip
-      const giftFolder = zip.folder(fileName.value + "project");
+      const giftFolder = zip.folder(fileName.value + ".project");
       giftFolder.file("content.tex", mainContent);
       giftFolder.file("references.bib", prefContent);
       giftFolder.file(
@@ -239,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Create a temporary link to download zip file
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = fileName.value + "project.zip";
+      a.download = fileName.value + ".project.zip";
 
       // Click on the link
       document.body.appendChild(a);

@@ -488,13 +488,13 @@ function replaceRefHashtag(content) {
 
 function mainProcess(content) {
   // Get main content
-  let mainContent = content,
+  let mainContent = String(content),
     titlepageContent,
     prefContent;
 
   // Hiding environments
   const codeMatches = [
-    ...mainContent.match(/#code\s*\n*(.*?)\n*#ecode/gsu),
+    ...mainContent.matchAll(/#code\s*\n*(.*?)\n*#ecode/gsu),
   ].map((match) => match[1]);
   mainContent = mainContent.replace(/#code\s*\n*(.*?)\n*#ecode/gsu, "@code");
 
@@ -503,9 +503,9 @@ function mainProcess(content) {
   [titlepageContent, mainContent] = replaceTitlepageHashtag(mainContent);
   [prefContent, mainContent] = replaceRefHashtag(mainContent);
 
-  const mathMatches = [...mainContent.match(/#math\n*(.*?)\n*#emath/gsu)].map(
-    (match) => match[1]
-  );
+  const mathMatches = [
+    ...mainContent.matchAll(/#math\n*(.*?)\n*#emath/gsu),
+  ].map((match) => match[1]);
   mainContent = mainContent.replace(/#math\n*(.*?)\n*#emath/gsu, "@math");
 
   mainContent = mainContent.replace(/\\#/g, "@sharp");
