@@ -147,7 +147,7 @@ function replaceListHashtag(content) {
     }
 
     let count = 1;
-    let result = `\\begin{${typeOfList}}\n`;
+    let result = `\\begin{singlespace}\n\\begin{${typeOfList}}\n`;
 
     for (let i = 0; i < lines.length; i++) {
       if (i > 0 && levels[i] > levels[i - 1]) {
@@ -162,6 +162,7 @@ function replaceListHashtag(content) {
       }
     }
     result += `\\end{${typeOfList}}`.repeat(count);
+    result += `\n\\end{singlespace}`;
     return result;
   }
 

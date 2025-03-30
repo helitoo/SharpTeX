@@ -1,0 +1,48 @@
+Tôi đã gửi cho bạn 2 file:
+
+- content.txt: Chứa nội dung THÔ (chưa được định dạng) của một bài báo cáo luận văn, đồ án Đại học, có hướng nghiên cứu khoa học, học thuật, hàn lâm.
+
+- syntax.csv: Chứa các quy tắc chuyển đổi sang mã #tex, gồm cột Cú pháp, Ý nghĩa và Chú ý.
+
+Hãy đọc content.txt, dựa trên cột Ý nghĩa trong syntax.csv để chuyển đổi nội dung sang mã #tex tương ứng.
+
+Lưu ý:
+- Trong content.txt có thể đã có một số câu cú đã tuân theo ngữ pháp #tex. Trong trường hợp đó, không cần chuyển đổi.
+- Bạn CHỈ cần gửi phản hồi về kết quả (nội dung sau khi được chuyển đổi), không cần gửi thêm lời gợi nhắc, lời giới thiệu, lời cảm ơn,...
+
+YÊU CẦU CHUYỂN ĐỔI
+
+1. Xử lý Trang Bìa (titlepage)
+- Nhận diện các nội dung: Tên trường Đại học, địa chỉ logo của trường, Tên báo cáo / môn học, Tên đề tài (Viết hoa chữ cái đầu, các chữ còn lại viết thường), Tên giảng viên hướng dẫn, Tên sinh viên, mã sinh viên, mã lớp, Thời gian & địa điểm báo cáo. Nếu thiếu nội dung nào, hãy tìm kiếm và bổ sung theo mẫu chuẩn của luận văn.
+- Sử dụng #titlepage-personal (ưu tiên) hoặc #titlepage-group nếu cần.
+
+2. Xử lý Tiêu đề
+- #us và #h1 phải xuất hiện ở đầu trang mới, trước đó có #break.
+- Tiêu đề h1 (#h1): Phải viết IN HOA. Bắt đầu bằng "CHƯƠNG" + Số La Mã + Dấu hai chấm (:) + Xuống dòng (nếu tiêu đề quá dài). Ví dụ: CHƯƠNG I:\n, CHƯƠNG II:\n
+- Tiêu đề h2, h3 (#h2, #h3): Bỏ số thứ tự đầu tiêu đề (Ví dụ: loại bỏ "1.1", "2.3",...)
+- Cần đọc hiểu ngữ nghĩa để nhận diện tiêu đề.
+
+3. Xử lý Nội dung Đặc Biệt
+- Trích dẫn, câu nói, bài thơ, đoạn văn trích dẫn → In nghiêng (#i).
+- Bảng biểu (#tbs): Nhận diện bảng dù có ký hiệu phân cách khác nhau (|, ,, tab, xuống dòng,...). Dòng đầu tiên là HEADER, các ô trong header phải căn giữa và in đậm; nếu không có header, phải bổ sung.
+- Công thức toán học (#math): Nhận diện mô tả công thức bằng ký hiệu riêng hoặc ngôn ngữ tự nhiên. Chuyển đổi sang mã LaTeX phù hợp. Ưu tiên môi trường display (\[ ... \]) trừ khi là inline nhỏ.
+
+4. Thứ Tự Nội Dung
+- Kết quả phải có đầy đủ và theo thứ tự sau: Trang bìa (#titlepage-personal hoặc #titlepage-group) → Mục lục (#cnt) → Danh mục bảng biểu (#tbs) (nếu có) → Danh mục hình ảnh (#imgs) (nếu có) → Nội dung chính → Danh mục tài liệu tham khảo (#refs) (nếu có). Nếu content.txt không đúng thứ tự này hoặc thiếu, phải sửa lại / bổ sung.
+- Nếu gặp danh sách tuần tự, thường mô tả các bước thực hiện một nhiệm vụ nào đó hoặc danh sách các tính chất nào đó → Đổi theo #cl. Trong trường hợp khác → Đổi theo #ul.
+- Đối với danh sách (#ul, #cl), nếu xuất hiện đoạn mô tả ở đầu mỗi mục thì in hoa đoạn mô tả đó. Ví dụ:
+1. Tính đóng gói: Nội dung ... .
+2. Tính kế thừa: Nội dung ... .
+→ In hoa "Tính đóng gói" và "Tính kế thừa"
+
+5. Lưu Nhật Ký Chỉnh Sửa
+Mọi chỉnh sửa phải được ghi lại ở cuối file với cú pháp % Nội dung chỉnh sửa. Ví dụ:
+% Đã thêm #us trước tiêu đề "GIỚI THIỆU".
+% Bổ sung dấu chấm cuối câu trong đoạn 3.
+% Sửa lỗi chính tả "lập trìn" → "lập trình".
+
+QUY TẮC CHUNG
+- Kiểm tra lỗi chính tả và sửa lỗi.
+- Bổ sung dấu chấm cuối câu / đoạn văn / tiêu đề nếu thiếu.
+- Tên đề tài trên trang bìa: Chữ cái đầu tiên viết hoa, còn lại viết thường.
+- Tiêu đề #h1 và #us phải viết IN HOA TOÀN BỘ.

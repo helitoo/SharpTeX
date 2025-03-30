@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const importButton = document.getElementById("importButton");
   const saveButton = document.getElementById("saveButton");
   const exportButton = document.getElementById("exportButton");
+  const generateButton = document.getElementById("generateButton");
   const fileName = document.getElementById("fileName");
   let page = document.getElementById("page");
 
@@ -69,6 +70,31 @@ document.addEventListener("DOMContentLoaded", () => {
       URL.revokeObjectURL(url);
       document.body.removeChild(a);
     }
+  });
+
+  //==========================
+  // Event generator
+  //==========================
+  generateButton.addEventListener("click", () => {
+    resetPageLoad();
+
+    fetch("http://127.0.0.1:8000/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain",
+      },
+      body: page.value,
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        page.value = data.replace(/^"(.*)"$/, "$1");
+        page.value = page.value.replace(/\\n/g, "\n");
+        triggerPageLoad();
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+        triggerPageLoad();
+      });
   });
 
   //==========================
@@ -151,11 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
 \\newcommand{\\SetCustomFontSize}{\\changefontsizes{13pt}}
 \\AtBeginDocument{\\SetCustomFontSize}
 
-% Paragraph and Math Indentation
-\\setlength{\\parindent}{0pt}
-\\setlength{\\parskip}{0pt}
-\\setlength{\\mathindent}{0pt}
-
 % line spacing
 \\AtBeginDocument{\\setstretch{1.5}}
 
@@ -170,6 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
 \\titleformat{\\section}{\\fontsize{14pt}{0pt}\\bfseries \\centering}{}{0pt}{\\setcounter{subsection}{0} \\setcounter{subsubsection}{0} \\setcounter{paragraph}{0}}
 
 \\newcommand{\\heading}[1]{
+    \\cleardoublepage
     \\section{#1}
 }
 

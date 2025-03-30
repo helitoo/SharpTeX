@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="./src/style/index.css" />
     <link rel="stylesheet" href="./src/style/floating_windows.css" />
     <link rel="stylesheet" href="./src/style/dropdown_menu.css" />
+    <link rel="stylesheet" href="./src/style/loading.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="./src/script/loading.js"></script>
     <script src="./src/script/sharptex_engine.js"></script>
     <script src="./src/script/shortcuts.js"></script>
     <script src="./src/script/dropdown_menu_engine.js"></script>
@@ -21,6 +23,10 @@
   <body
     onclick="hindDropdown(event, 'titlepageDropdown'); hindDropdown(event, 'prefDropdown');"
   >
+    <div id="loading-screen">
+      <img src="./img/loading.gif" id="sticker" alt="Loading Sticker" />
+      <p id="loading-text"></p>
+    </div>
     <div class="toolbar">
       <div class="logo">
         <a href=""><img src="./img/icon.svg" alt="#TeX logo" width="59px" /></a>

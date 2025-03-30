@@ -1,0 +1,196 @@
+Chú ý: Sau mỗi dòng đều cách nhau một dòng trống (Xem code mẫu phía dưới).,,,
+Cú pháp #tex,Ý nghĩa,Kết quả,Chú ý
+"#code
+print(""Hello world!"");
+#ecode","Môi trường code, giữ nguyên những gì đã viết, áp dụng font Consolas.","print(""Hello world!"");",
+"#math
+$$a^2$$
+#emath","Môi trường công thức toán học, cú pháp công thức Toán vẫn tuân theo cú pháp của LaTeX.",,
+\#,Chèn dấu #.,#,"Trong môi trường code và math, không cần dùng lệnh này."
+\$,Chèn dấu $.,$,
+\;,Chèn dấu ;,;,
+<>,Dấu khác.,≠,
+=>,Chèn dấu suy ra.,⇒,
+<=,Chèn dấu bé hơn hoặc bằng.,≤,
+>=,Chèn dấu lớn hơn hoặc bằng.,≥,
+->,Chèn dấu mũi tên sang phải.,→,
+<-,Chèn dấu mũi tên sang trái.,←,
+#avoid,Chặn đánh số trang ở trang giấy hiện tại.,,
+#break,"Ngắt trang, tạo trang giấy mới.",,
+#cnts,"Chèn mục lục.
+Đã được cài đặt sẵn #avoid và #break.",,
+#imgs,"Chèn danh mục hình ảnh.
+Đã được cài đặt sẵn #avoid và #break.",,
+#tbs,"Chèn danh mục bảng biểu.
+Đã được cài đặt sẵn #avoid và #break.",,
+#refs,"Chèn danh mục tài liệu tham khảo.
+Đã được cài đặt sẵn #avoid.",,
+"#titlepage-personal
+$ĐẠI HỌC QUỐC GIA TP. HCM\\TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN
+$school_logo.png
+$ĐỒ ÁN BÁO CÁO\\MÔN TRÍ TUỆ NHÂN TẠO
+$Nghiên cứu mô hình học sâu trong\\bài toán phát hiện vi phạm giao thông
+$ThS. Tên_giảng_viên
+$Tên_sinh_viên
+$MSSV
+$Mã_lớp
+$TP. Hồ Chí Minh, 03/2025
+#","Mẫu bìa cứng dành cho cá nhân.
+Bìa này đã được cài đặt sẵn #avoid và #break.",,"Ở mỗi dấu $, chỉ viết trên một hàng, nếu muốn xuống hàng chỗ nào thì dùng \\ ở chỗ đó."
+"#titlepage-group
+$ĐẠI HỌC QUỐC GIA TP. HCM\\TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN
+$school_logo.png
+$ĐỒ ÁN BÁO CÁO\\MÔN TRÍ TUỆ NHÂN TẠO
+$Nghiên cứu mô hình học sâu trong\\bài toán phát hiện vi phạm giao thông
+$ThS. Tên_giảng_viên
+$Mã_lớp
+$Tên_nhóm_(nếu có)
+1.;SV_1;MSSV_1
+2.;SV_2;MSSV_2
+$TP. Hồ Chí Minh, 03/2025
+#","Mẫu bìa cứng dành cho tập thể.
+Bìa này đã được cài đặt sẵn #avoid và #break.",,
+"#book
+$Tác_giả
+$Tiêu_đề
+$Năm_xuất_bản
+$Nhà_xuất_bản
+#
+",Khai báo nguồn trích dẫn là sách.,,
+"#webpage
+$Tác_giả
+$Tiêu_đề
+$Năm_xuất bản
+$Ngày_truy_cập
+$link
+#
+",Khai báo nguồn trích dẫn là trang web.,,
+"#thesis
+$Tác_giả
+$Tiêu_đề
+$Năm_xuất_bản
+$mastersthesis
+$Trường_đại_học
+#",Khai báo nguồn trích dẫn là luận văn thạc sĩ.,,
+"#thesis
+$Tác_giả
+$Tiêu_đề
+$Năm_xuất_bản
+$phdthesis
+$Trường_đại_học
+#",Khai báo nguồn trích dẫn là luận văn tiến sĩ.,,
+#us LỜI CẢM ƠN#,"Tiêu đề cấp 1, không đánh số thứ tự → Cần đánh số thủ công như CHƯƠNG I, CHƯƠNG II,...",,
+#h1 CHƯƠNG I: LÝ THUYẾT XÁC SUẤT#,"Tiêu đề cấp 1, ngầm đánh số thứ tự → Không cần đánh số thủ công như 1.1, 1.2, 2.1,...",,
+#h2 Định nghĩa xác suất#,"Tiêu đề cấp 2, đánh số thứ tự tự động  → Không cần đánh số thủ công như 1.1, 1.2, 2.1,...",,
+#h3 Biến rời rạc#,"Tiêu đề cấp 3, đánh số thứ tự tự động  → Không cần đánh số thủ công như 1.1, 1.2, 2.1,...",,
+#b Nội dung#,In đậm nội dung.,Nội dung,
+#u Nội dung#,Gạch chân nội dung.,Nội dung,
+#i Nội dung#,In nghiêng nội dung.,Nội dung,
+#bi Nội dung#,In đậm và in nghiêng nội dung.,Nội dung,
+#ib Nội dung#,,,
+#bu Nội dung#,In đậm và gạch chân nội dung.,Nội dung,
+#ub Nội dung#,,,
+#iu Nội dung#,In nghiêng và gạch chân nội dung.,Nội dung,
+#ui Nội dung#,,,
+#biu Nội dung#,"In đậm, in nghiêng, gạch chân nội dung.",Nội dung,
+#bui Nội dung#,,,
+#ibu Nội dung#,,,
+#iub Nội dung#,,,
+#uib Nội dung#,,,
+#ubi Nội dung#,,,
+#c Nội dung#,Căn giữa nội dung.,Nội dung,
+"#img
+$image.png
+#",Chèn hình ảnh không có chú thích. Ảnh này sẽ không xuất hiện trong danh mục bảng hình ảnh.,,
+"#img
+$image.png
+$Chú thích
+#",Chèn hình ảnh có chú thích.,,"Chú thích phải viết trên một dòng, không xuống dòng."
+"#header
+$Nội dung bên trái
+$Nội dung ở giữa
+$Nội dung bên phải
+#",Header.,,"Ở mỗi dấu $, chỉ viết trên một hàng, nếu muốn xuống hàng chỗ nào thì dùng \\ ở chỗ đó."
+"#footer
+$Nội dung bên trái
+$Nội dung ở giữa
+$Nội dung bên phải
+#",Footer.,,
+"#ul
+$abc
+$abc
+$$abc
+$$abc
+#",Chèn danh sách không có số thứ tự.,,"Ở mỗi dấu $, chỉ viết trên một dòng, không xuống dòng."
+"#cl
+$abc
+$abc
+$$abc
+$$abc
+#",Chèn danh sách có đánh số thứ tự.,,
+"#tb
+a;b;c;d
+e;f;g;h
+#",Chèn bảng không có chú thích. Bảng này sẽ không xuất hiện trong danh mục bảng biểu.,,"Mỗi ô chỉ viết trên một dòng, nếu muốn xuống dòng chỗ nào thì dùng \\ ở chỗ đó."
+"#tb
+a;b;c;d
+e;f;g;h
+$Chú thích
+#",Chèn bảng có chú thích. Luôn in đậm hàng đầu tiên.,,
+Code mẫu:,,,
+"#titlepage-group
+$ĐẠI HỌC QUỐC GIA TP. HCM\\TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN
+$bku.png
+$ĐỒ ÁN BÁO CÁO\\MÔN KỸ NĂNG NGHỀ NGHIỆP
+$Kỹ Năng Quản Lý Thời Gian
+$ThS. Tên_giảng_viên
+$Mã_lớp
+$Tên_nhóm_(nếu có)
+1.;TNBM;MSSV_1
+2.;Cao Thái Bảo;MSSV_2
+$TP. Hồ Chí Minh, 03/2025
+#
+
+#uh Lời Cảm Ơn#
+
+Trước tiên, tôi xin gửi lời cảm ơn chân thành đến gia đình, thầy cô và các bạn đã luôn đồng hành, hỗ trợ và góp ý quý báu trong quá trình hoàn thiện luận văn này. Sự khích lệ và động viên của quý vị đã giúp tôi vượt qua nhiều thử thách và hoàn thành công trình một cách hiệu quả.
+
+#break
+
+#cnts
+
+#uh Giới Thiệu#
+
+Trong thời đại số hóa, việc quản lý thời gian trở thành một kỹ năng thiết yếu để đạt được hiệu quả trong công việc và cuộc sống. Kỹ năng này giúp chúng ta tối ưu hóa lịch trình, cân bằng giữa công việc và giải trí, cũng như giảm bớt áp lực và căng thẳng. Luận văn này nhằm phân tích các chiến lược quản lý thời gian thông qua việc áp dụng các phương pháp hiện đại và công cụ hỗ trợ kỹ thuật số.
+
+#break
+
+#h1 CHƯƠNG I: Các Phương Pháp Quản Lý Thời Gian#
+
+#h2 Chiến Lược Cơ Bản#
+
+Để quản lý thời gian hiệu quả, mỗi cá nhân cần xây dựng cho mình một hệ thống làm việc khoa học, bao gồm các bước:
+
+#cl
+$#b Lập Kế Hoạch Hàng Ngày#: Xác định mục tiêu, xây dựng danh sách công việc và ưu tiên theo mức độ quan trọng.
+$#b Ưu Tiên Nhiệm Vụ#: Phân loại nhiệm vụ theo “quan trọng - khẩn cấp” để tập trung giải quyết những việc cần hoàn thành trước.
+$#b Phân Bổ Thời Gian Cụ Thể#: Sử dụng lịch trình cố định, chia nhỏ thời gian làm việc và nghỉ ngơi hợp lý.
+#
+
+#h2 Công Cụ Hỗ Trợ#
+
+Các công cụ kỹ thuật số là trợ thủ đắc lực trong việc quản lý thời gian. Dưới đây là bảng so sánh một số công cụ phổ biến:
+
+#tb
+Tên Công Cụ;Ưu Điểm;Nhược Điểm
+Google Calendar;Dễ sử dụng, tích hợp với các ứng dụng khác;Thiếu tính năng chuyên sâu
+Todoist;Giao diện thân thiện, đa nền tảng;Phiên bản nâng cao cần trả phí
+#
+
+Ngoài ra, các ứng dụng nhắc nhở và quản lý dự án khác cũng góp phần quan trọng giúp người dùng theo dõi tiến độ công việc và duy trì kỷ luật cá nhân.
+
+#break
+
+#uh Kết Luận#
+
+Kỹ năng quản lý thời gian không chỉ là yếu tố then chốt để nâng cao hiệu suất làm việc mà còn góp phần cân bằng cuộc sống cá nhân. Việc áp dụng các chiến lược lập kế hoạch, phân chia công việc và sử dụng công cụ hỗ trợ sẽ giúp cá nhân đạt được mục tiêu một cách hiệu quả. Từ đó, mỗi người có thể phát triển bền vững và đạt được sự thăng tiến trong công việc cũng như trong đời sống.",,,
