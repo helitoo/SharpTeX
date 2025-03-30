@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const importButton = document.getElementById("importButton");
   const saveButton = document.getElementById("saveButton");
   const exportButton = document.getElementById("exportButton");
-  const generateButton = document.getElementById("generateButton");
   const fileName = document.getElementById("fileName");
   let page = document.getElementById("page");
 
@@ -70,31 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
       URL.revokeObjectURL(url);
       document.body.removeChild(a);
     }
-  });
-
-  //==========================
-  // Event generator
-  //==========================
-  generateButton.addEventListener("click", () => {
-    resetPageLoad();
-
-    fetch("http://127.0.0.1:8000/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain",
-      },
-      body: page.value,
-    })
-      .then((response) => response.text())
-      .then((data) => {
-        page.value = data.replace(/^"(.*)"$/, "$1");
-        page.value = page.value.replace(/\\n/g, "\n");
-        triggerPageLoad();
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
-        triggerPageLoad();
-      });
   });
 
   //==========================
