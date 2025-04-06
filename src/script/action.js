@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
 \\usepackage{titlesec}
 
 % Uncount section lv 1
-\\newcommand{\\uncountSection}[1]{\\section*{#1} \\addcontentsline{toc}{section}{#1}
+\\newcommand{\\uncountSection}[1]{\\cleardoublepage \\section*{#1} \\addcontentsline{toc}{section}{#1}
 }
 
 % Secsion lv 1

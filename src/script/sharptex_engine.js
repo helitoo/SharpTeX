@@ -24,7 +24,7 @@ function replaceRepropcess(content) {
 function replaceSymbolsHashtag(content) {
   content = content.replace(/#cnts/, "\\tableofcontents");
   content = content.replace(/#imgs/, "\\listoffigures");
-  content = content.replace(/#tbs/, "\\tableofcontents");
+  content = content.replace(/#tbs/, "\\listoftables");
   content = content.replace(/#refs/, "\\nocite{*}\n\\printbibliography");
   content = content.replace(/#avoid/g, "\\thispagestyle{empty}");
   content = content.replace(/#break/g, "\\cleardoublepage");
