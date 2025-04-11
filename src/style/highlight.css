@@ -1,0 +1,44 @@
+.sharptex-bold {
+  font-weight: bold;
+}
+
+.sharptex-italic {
+  font-style: italic;
+}
+
+.sharptex-underline {
+  text-decoration: underline;
+}
+
+.sharptex-h1 {
+  width: 100%;
+  display: inline-block;
+  font-size: 2em;
+  margin: 0.5em 0;
+}
+
+.sharptex-h2 {
+  width: 100%;
+  display: inline-block;
+  font-size: 1.5em;
+  margin: 0.3em 0;
+}
+
+.sharptex-h3 {
+  width: 100%;
+  display: inline-block;
+  font-size: 1.3em;
+  margin: 0.1em 0;
+}
+
+.sharptex-center {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.sharptex-right {
+  display: inline-block;
+  width: 100%;
+  text-align: right;
+}

@@ -1,0 +1,58 @@
+const patterns = {
+  code: /#code\s*\n*(.*?)\s*#ecode/gsu,
+  math: /#math\n*(.*?)\s*#emath/gsu,
+  percent: /%/g,
+  and: /&/g,
+  exp: /\^/g,
+  underscore: /_/g,
+  braceOpen: /\{/g,
+  braceClose: /\}/g,
+  approx: /~~/g,
+  nEq: /<>/g,
+  therefore: /=>/g,
+  leq: /<=/g,
+  geq: />=/g,
+  arrowLeft: /<-/g,
+  arrowRight: /->/g,
+  greater: />/g,
+  smaller: /</g,
+  cnts: /#cnts/,
+  imgs: /#imgs/,
+  tbs: /#tbs/,
+  refs: /#refs/,
+  avoid: /#avoid/g,
+  break: /#break/g,
+  uh: /#uh[\t ]*([^\n]*)/gu,
+  h1: /#h1[\t ]*([^\n]*)/gu,
+  h2: /#h2[\t ]*([^\n]*)/gu,
+  h3: /#h3[\t ]*([^\n]*)/gu,
+  b: /#b[\t ]*(.*?)[\t ]*(?:$|#)/gmu,
+  u: /#u[\t ]*(.*?)[\t ]*(?:$|#)/gmu,
+  i: /#i[\t ]*(.*?)[\t ]*(?:$|#)/gmu,
+  bi: /#(?:(?:bi)|(?:ib))[\t ]*(.*?)[\t ]*(?:$|#)/gmu,
+  bu: /#(?:(?:bu)|(?:ub))[\t ]*(.*?)[\t ]*(?:$|#)/gmu,
+  iu: /#(?:(?:iu)|(?:ui))[\t ]*(.*?)[\t ]*(?:$|#)/gmu,
+  biu: /#(?:(?:biu)|(?:bui)|(?:ibu)|(?:iub)|(?:uib)|(?:ubi))[\t ]*(.*?)[\t ]*(?:$|#)/gmu,
+  c: /#c[\t ]*([^\n]*)/gu,
+  imgc: /#img[\t ]*\n*\$[\t ]*(.*?)\n*\$[\t ]*(.*?)(?:$|#)/gmu,
+  img: /#img[\t ]*\n*\$(.*?)(?:$|#)/gmu,
+  header:
+    /#header[\t ]*\n*\$[\t ]*(.*?)\n*\$[\t ]*(.*?)\n*\$[\t ]*(.*?)\n*#*/gu,
+  footer:
+    /#footer[\t ]*\n*\$[\t ]*(.*?)\n*\$[\t ]*(.*?)\n*\$[\t ]*(.*?)\n*#*/gu,
+  ul: /#ul\s*\n(.*?)\n#/gsu,
+  cl: /#cl\s*\n(.*?)\n#/gsu,
+  tbc: /#tb\s*\n(.*?)\n\$(.*?)\n*#/gsu,
+  tb: /#tb\s*\n(.*?)\n#/gsu,
+  titlepagePersonal:
+    /#titlepage-personal\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#?/su,
+  titlepageGroup:
+    /#titlepage-group\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#?/su,
+  book: /#book\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#*/gsu,
+  webpage: /#webpage\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#*/gsu,
+  thesis: /#thesis\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#*/gsu,
+};
+
+function cloneRegex(regex) {
+  return new RegExp(regex, regex.flags);
+}

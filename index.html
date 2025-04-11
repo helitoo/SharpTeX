@@ -5,14 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>#TeX Editor</title>
     <link rel="shortcut icon" href="./img/icon.png" type="image/x-icon" />
+
+    <!-- Highlight styles -->
+    <link rel="stylesheet" href="./src/style/highlight.css" />
+
+    <!-- Viewport styles -->
     <link rel="stylesheet" href="./src/style/reset.css" />
     <link rel="stylesheet" href="./src/style/index.css" />
     <link rel="stylesheet" href="./src/style/floating_windows.css" />
     <link rel="stylesheet" href="./src/style/dropdown_menu.css" />
     <link rel="stylesheet" href="./src/style/loading.css" />
+
+    <!-- Zip module -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <!-- Local script -->
     <script src="./src/script/loading.js"></script>
-    <script src="./src/script/sharptex_engine.js"></script>
+    <script src="./src/script/sharptex_engine/prepare.js"></script>
+    <script src="./src/script/sharptex_engine/parse.js"></script>
     <script src="./src/script/shortcuts.js"></script>
     <script src="./src/script/dropdown_menu_engine.js"></script>
     <script src="./src/script/find_n_replace_engine/open_find_n_replace.js"></script>

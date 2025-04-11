@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .highlight {
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="element" style="background-color: antiquewhite"></div>
+    <script type="module">
+      import { Editor } from "https://esm.sh/@tiptap/core";
+      //import StarterKit from "https://esm.sh/@tiptap/starter-kit";
+      import Document from "https://esm.sh/@tiptap/extension-document";
+      import Paragraph from "https://esm.sh/@tiptap/extension-paragraph";
+      import Text from "https://esm.sh/@tiptap/extension-text";
+      import { Extension } from "https://esm.sh/@tiptap/core";
+      import { Plugin } from "https://esm.sh/prosemirror-state";
+      import {
+        Decoration,
+        DecorationSet,
+      } from "https://esm.sh/prosemirror-view";
+
+      // Create extension
+      const RegexStyler = Extension.create({
+        name: "RegexStyler",
+        addProseMirrorPlugins() {
+          return [
+            new Plugin({
+              state: {
+                // Constructor (In rule)
+                init(_, { doc }) {
+                  return DecorationSet.create(doc, []);
+                },
+
+                // The event when the user typing
+                apply(tr, decorationSet, oldState, newState) {
+                  const decorations = [];
+                  const docText = newState.doc.textBetween(
+                    0,
+                    newState.doc.content.size,
+                    "\n"
+                  );
+
+                  const regexMap = [
+                    { regex: /!!(.*?)!!/g, className: "highlight" },
+                    { regex: /\*\*(.*?)\*\*/g, className: "highlight" },
+                    { regex: /__(.*?)__/g, className: "highlight" },
+                  ];
+
+                  for (const { regex, className } of regexMap) {
+                    let match;
+                    while ((match = regex.exec(docText)) !== null) {
+                      const start = match.index;
+                      const end = start + match[0].length;
+
+                      decorations.push(
+                        Decoration.inline(start + 1, end + 1, {
+                          class: className,
+                        })
+                      );
+                    }
+                  }
+
+                  return DecorationSet.create(newState.doc, decorations);
+                },
+              },
+
+              // Render format (In rule)
+              props: {
+                decorations(state) {
+                  return this.getState(state);
+                },
+              },
+            }),
+          ];
+        },
+      });
+
+      // Create new editor với đầy đủ các extension cần thiết.
+      new Editor({
+        element: document.querySelector(".element"),
+        extensions: [
+          Document,
+          Paragraph,
+          Text,
+          //highlight, // Thêm mark highlight
+          RegexStyler, // Thêm extension chứa plugin regex
+        ],
+        //content: "<p>Hello World!</p>",
+      });
+    </script>
+  </body>
+</html>

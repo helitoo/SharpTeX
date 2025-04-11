@@ -9,7 +9,7 @@ function replaceRepropcess(content) {
   content = content.replace(/_/g, "\\_ ");
   content = content.replace(/\{/g, "\\{ ");
   content = content.replace(/\}/g, "\\} ");
-  content = content.replace(/~/g, "\\~{} ");
+  content = content.replace(/~~/g, "\\approx ");
   content = content.replace(/<>/g, "$\\neq$");
   content = content.replace(/=>/g, "$\\Rightarrow$");
   content = content.replace(/<=/g, "$\\leq$");
@@ -96,28 +96,28 @@ function replaceLayoutHashtag(content) {
     /#img\s*\n\$(.*?)\n\$(.*?)\n#?/gu,
     (match, link, caption) => {
       return `\\begin{figure}[H]
-    \\centering
-    \\includegraphics[width=0.5\\textwidth]{${link}}
-    \\caption{\\fontsize{12pt}{0pt}\\selectfont{${caption}}}
-\\end{figure}`;
+      \\centering
+      \\includegraphics[width=0.5\\textwidth]{${link}}
+      \\caption{\\fontsize{12pt}{0pt}\\selectfont{${caption}}}
+  \\end{figure}`;
     }
   );
 
   content = content.replace(/#img\s*\n\$(.*?)\n#?/gu, (match, link) => {
     return `\\begin{figure}[H]
-    \\centering
-    \\includegraphics[width=0.5\\textwidth]{${link}}
-\\end{figure}`;
+      \\centering
+      \\includegraphics[width=0.5\\textwidth]{${link}}
+  \\end{figure}`;
   });
 
   content = content.replace(
     /#header\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#?/gu,
     (match, left, right, center) => {
       return `\\pagestyle{fancy}
-\\fancyhead[L]{${left}}
-\\fancyhead[C]{${center}}
-\\fancyhead[R]{${right}}
-\\renewcommand{\\headrulewidth}{0.4pt}`;
+  \\fancyhead[L]{${left}}
+  \\fancyhead[C]{${center}}
+  \\fancyhead[R]{${right}}
+  \\renewcommand{\\headrulewidth}{0.4pt}`;
     }
   );
 
@@ -125,10 +125,10 @@ function replaceLayoutHashtag(content) {
     /#footer\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#?/gu,
     (match, left, right, center) => {
       return `\\pagestyle{fancy}
-\\fancyfoot[L]{${left}}
-\\fancyfoot[C]{${center}}
-\\fancyfoot[R]{${right}}
-\\renewcommand{\\headrulewidth}{0.4pt}`;
+  \\fancyfoot[L]{${left}}
+  \\fancyfoot[C]{${center}}
+  \\fancyfoot[R]{${right}}
+  \\renewcommand{\\headrulewidth}{0.4pt}`;
     }
   );
 
@@ -211,14 +211,14 @@ function replaceTableHashtag(content) {
     return result;
   }
 
-  content = content.replace(/#tb\s*\n(.*?)\n#/gsu, (match, content) =>
-    getTable(match, content, "")
-  );
-
   content = content.replace(
     /#tb\s*\n(.*?)\n\$(.*?)\n?#/gsu,
     (match, content, caption) =>
       getTable(match, content, `\\caption[${caption}]{${caption}}\n`)
+  );
+
+  content = content.replace(/#tb\s*\n(.*?)\n#/gsu, (match, content) =>
+    getTable(match, content, "")
   );
 
   return content;
@@ -248,56 +248,56 @@ function replaceTitlepageHashtag(content) {
         place
       ) => {
         return `\\newcommand{\\coverpage}{
-      \\begin{titlepage}
-          \\begin{tikzpicture}[overlay, remember picture]
-          \\draw [line width=3pt]
-          ($ (current page.north west) + (3.0cm, -2.0cm) $)
-          rectangle
-          ($ (current page.south east) + (-2.0cm, 2.5cm) $);
-          \\draw [line width=0.5pt]
-          ($ (current page.north west) + (3.1cm, -2.1cm) $)
-          rectangle
-          ($ (current page.south east) + (-2.1cm, 2.6cm) $);
-          \\end{tikzpicture}
-  
-      \\centering
-      \\textbf{${school}}\\\\
-      
-      \\vspace{1cm}
-      \\includegraphics[width=0.2\\textwidth]{${logo}}\\\\
-      \\vspace{1cm}
-      \\Large
-      \\textbf{${thesis}}\\\\
-  
-      \\begin{center}
-      Đề tài\\\\
-          \\begin{minipage}[c][3\\baselineskip][c]{0.8\\textwidth}
-              \\centering \\textbf{${topic}}
-          \\end{minipage}
-      \\end{center}
-  
-      \\justifying \\normalsize  
-      \\begin{table}[h]
-          \\centering
-          \\renewcommand{\\arraystretch}{1.5}
-          \\begin{tabular}{l l}
-              \\textbf{\\textit{Giảng viên hướng dẫn:}}&${instructor}\\\\
-              \\textbf{\\textit{Sinh viên thực hiện:}}&${student}\\\\
-              \\textbf{\\textit{MSSV:}}&${studentID}\\\\
-              \\textbf{\\textit{Mã lớp:}}&${classID}\\\\
-          \\end{tabular}
-      \\end{table}
-  
-      \\vfill
-      \\begin{center}
-          \\textbf{${place}}
-      \\end{center}
-  \\end{titlepage}
-  \\newpage
-  \\thispagestyle{empty}
-  }
-\\endinput
-`;
+        \\begin{titlepage}
+            \\begin{tikzpicture}[overlay, remember picture]
+            \\draw [line width=3pt]
+            ($ (current page.north west) + (3.0cm, -2.0cm) $)
+            rectangle
+            ($ (current page.south east) + (-2.0cm, 2.5cm) $);
+            \\draw [line width=0.5pt]
+            ($ (current page.north west) + (3.1cm, -2.1cm) $)
+            rectangle
+            ($ (current page.south east) + (-2.1cm, 2.6cm) $);
+            \\end{tikzpicture}
+    
+        \\centering
+        \\textbf{${school}}\\\\
+        
+        \\vspace{1cm}
+        \\includegraphics[width=0.2\\textwidth]{${logo}}\\\\
+        \\vspace{1cm}
+        \\Large
+        \\textbf{${thesis}}\\\\
+    
+        \\begin{center}
+        Đề tài\\\\
+            \\begin{minipage}[c][3\\baselineskip][c]{0.8\\textwidth}
+                \\centering \\textbf{${topic}}
+            \\end{minipage}
+        \\end{center}
+    
+        \\justifying \\normalsize  
+        \\begin{table}[h]
+            \\centering
+            \\renewcommand{\\arraystretch}{1.5}
+            \\begin{tabular}{l l}
+                \\textbf{\\textit{Giảng viên hướng dẫn:}}&${instructor}\\\\
+                \\textbf{\\textit{Sinh viên thực hiện:}}&${student}\\\\
+                \\textbf{\\textit{MSSV:}}&${studentID}\\\\
+                \\textbf{\\textit{Mã lớp:}}&${classID}\\\\
+            \\end{tabular}
+        \\end{table}
+    
+        \\vfill
+        \\begin{center}
+            \\textbf{${place}}
+        \\end{center}
+    \\end{titlepage}
+    \\newpage
+    \\thispagestyle{empty}
+    }
+  \\endinput
+  `;
       }
     );
 
@@ -332,60 +332,60 @@ function replaceTitlepageHashtag(content) {
     titlepageContent = titlepageContent.replace(
       regexGroup,
       `\\newcommand{\\coverpage}{
-      \\begin{titlepage}
-          \\begin{tikzpicture}[overlay, remember picture]
-          \\draw [line width=3pt]
-          ($ (current page.north west) + (3.0cm, -2.0cm) $)
-          rectangle
-          ($ (current page.south east) + (-2.0cm, 2.5cm) $);
-          \\draw [line width=0.5pt]
-          ($ (current page.north west) + (3.1cm, -2.1cm) $)
-          rectangle
-          ($ (current page.south east) + (-2.1cm, 2.6cm) $);
-          \\end{tikzpicture}
-  
-      \\centering
-      \\textbf{${school}}\\\\
-      
-      \\vspace{1cm}
-      \\includegraphics[width=0.2\\textwidth]{${logo}}\\\\
-      \\vspace{1cm}
-      \\Large
-      \\textbf{${thesis}}\\\\
-  
-      \\begin{center}
-      Đề tài\\\\
-          \\begin{minipage}[c][3\\baselineskip][c]{0.8\\textwidth}
-              \\centering \\textbf{${topic}}
-          \\end{minipage}
-      \\end{center}
-      \\vspace{-0.7cm}
-      \\justifying \\normalsize  
-      \\begin{table}[h]
-          \\centering
-          \\begin{tabular}{l l}
-              \\textbf{\\textit{Giảng viên hướng dẫn:}}&${instructor}\\\\
-              \\textbf{\\textit{Mã lớp:}}&${classID}\\\\
-              \\textbf{\\textit{Nhóm sinh viên thực hiện:}}&${group}\\\\
-          \\end{tabular}
-      \\end{table}
-      \\vspace{-0.8cm}
-      \\begin{table}[h]
-          \\centering
-          \\begin{tabular}{l l l}
-              ${convertedTable}
-          \\end{tabular}
-      \\end{table}
-      \\vfill
-      \\begin{center}
-          \\textbf{${place}}
-      \\end{center}
-  \\end{titlepage}
-  \\newpage
-  \\thispagestyle{empty}
-  }
-\\endinput
-`
+        \\begin{titlepage}
+            \\begin{tikzpicture}[overlay, remember picture]
+            \\draw [line width=3pt]
+            ($ (current page.north west) + (3.0cm, -2.0cm) $)
+            rectangle
+            ($ (current page.south east) + (-2.0cm, 2.5cm) $);
+            \\draw [line width=0.5pt]
+            ($ (current page.north west) + (3.1cm, -2.1cm) $)
+            rectangle
+            ($ (current page.south east) + (-2.1cm, 2.6cm) $);
+            \\end{tikzpicture}
+    
+        \\centering
+        \\textbf{${school}}\\\\
+        
+        \\vspace{1cm}
+        \\includegraphics[width=0.2\\textwidth]{${logo}}\\\\
+        \\vspace{1cm}
+        \\Large
+        \\textbf{${thesis}}\\\\
+    
+        \\begin{center}
+        Đề tài\\\\
+            \\begin{minipage}[c][3\\baselineskip][c]{0.8\\textwidth}
+                \\centering \\textbf{${topic}}
+            \\end{minipage}
+        \\end{center}
+        \\vspace{-0.7cm}
+        \\justifying \\normalsize  
+        \\begin{table}[h]
+            \\centering
+            \\begin{tabular}{l l}
+                \\textbf{\\textit{Giảng viên hướng dẫn:}}&${instructor}\\\\
+                \\textbf{\\textit{Mã lớp:}}&${classID}\\\\
+                \\textbf{\\textit{Nhóm sinh viên thực hiện:}}&${group}\\\\
+            \\end{tabular}
+        \\end{table}
+        \\vspace{-0.8cm}
+        \\begin{table}[h]
+            \\centering
+            \\begin{tabular}{l l l}
+                ${convertedTable}
+            \\end{tabular}
+        \\end{table}
+        \\vfill
+        \\begin{center}
+            \\textbf{${place}}
+        \\end{center}
+    \\end{titlepage}
+    \\newpage
+    \\thispagestyle{empty}
+    }
+  \\endinput
+  `
     );
 
     return [titlepageContent, content];
@@ -431,12 +431,12 @@ function replaceRefHashtag(content) {
     bookRegex,
     (match, author, title, year, publisher) => {
       return `@book{${crypto.randomUUID()},,
-  author    = {${author}},
-  title     = {${title}},
-  year      = {${year}},
-  publisher = {${publisher}}
-}
-`;
+    author    = {${author}},
+    title     = {${title}},
+    year      = {${year}},
+    publisher = {${publisher}}
+  }
+  `;
     }
   );
 
@@ -444,13 +444,13 @@ function replaceRefHashtag(content) {
     webpageRegex,
     (match, author, title, year, note, link) => {
       return `@misc{${crypto.randomUUID()},,
-  author    = {${author}},
-  title     = {${title}},
-  year      = {${year}},
-  url       = {${link}},
-  note      = {Truy cập ngày ${note}}
-}
-`;
+    author    = {${author}},
+    title     = {${title}},
+    year      = {${year}},
+    url       = {${link}},
+    note      = {Truy cập ngày ${note}}
+  }
+  `;
     }
   );
 
@@ -460,20 +460,20 @@ function replaceRefHashtag(content) {
       type = type.trim().toLowerCase();
       if (type == "mastersthesis") {
         return `@mastersthesis{${crypto.randomUUID()},,
-  author    = {${author}},
-  title     = {${title}},
-  school    = {${school}},
-  year      = {${year}}
-}
-`;
+    author    = {${author}},
+    title     = {${title}},
+    school    = {${school}},
+    year      = {${year}}
+  }
+  `;
       } else {
         return `@phdthesis{${crypto.randomUUID()},
-  author    = {${author}},
-  title     = {${title}},
-  school    = {${school}},
-  year      = {${year}}
-}
-`;
+    author    = {${author}},
+    title     = {${title}},
+    school    = {${school}},
+    year      = {${year}}
+  }
+  `;
       }
     }
   );
