@@ -43,31 +43,35 @@ document.addEventListener("DOMContentLoaded", () => {
   //==========================
   // Event save file
   //==========================
+  async function saveAs(name, content) {
+    const fileHandle = await window.showSaveFilePicker({
+      suggestedName: name,
+    });
+
+    const writable = await fileHandle.createWritable();
+    await writable.write(content);
+    await writable.close();
+  }
+
+  function download(name, blob) {
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = name;
+    document.body.appendChild(a);
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  }
+
   saveButton.addEventListener("click", async () => {
     if (window.showSaveFilePicker) {
-      const fileHandle = await window.showSaveFilePicker({
-        suggestedName: fileName.value,
-      });
-
-      const writable = await fileHandle.createWritable();
-      await writable.write(page.value);
-      await writable.close();
+      saveAs(fileName.value, page.value);
     } else {
-      const blob = new Blob([page.value], { type: "text/plain" });
-      const url = URL.createObjectURL(blob);
-
-      // Create a temporary link to download zip file
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = fileName.value;
-      document.body.appendChild(a);
-
-      // Click on the link
-      a.click();
-
-      // Remove the link from the page
-      URL.revokeObjectURL(url);
-      document.body.removeChild(a);
+      download(fileName, new Blob([page.value], { type: "text/plain" }));
     }
   });
 
@@ -241,20 +245,10 @@ document.addEventListener("DOMContentLoaded", () => {
 ` + titlepageContent
       );
 
-      // Create zip file from it's object
-      const blob = await zip.generateAsync({ type: "blob" });
-
-      // Create a temporary link to download zip file
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = fileName.value + ".project.zip";
-
-      // Click on the link
-      document.body.appendChild(a);
-      a.click();
-
-      // Remove the link from the page
-      document.body.removeChild(a);
+      download(
+        fileName + "-project.zip",
+        await zip.generateAsync({ type: "blob" })
+      );
     } catch (error) {
       alert("Error: " + error);
     }

@@ -3,97 +3,95 @@
 //////////////////////////////////////////////
 
 function replaceRepropcess(content) {
-  content = content.replace(/%/g, "\\% ");
-  content = content.replace(/&/g, "\\& ");
-  content = content.replace(/\^/g, "\\^ ");
-  content = content.replace(/_/g, "\\_ ");
-  content = content.replace(/\{/g, "\\{ ");
-  content = content.replace(/\}/g, "\\} ");
-  content = content.replace(/~~/g, "\\approx ");
-  content = content.replace(/<>/g, "$\\neq$");
-  content = content.replace(/=>/g, "$\\Rightarrow$");
-  content = content.replace(/<=/g, "$\\leq$");
-  content = content.replace(/>=/g, "$\\geq$");
-  content = content.replace(/<-/g, "$\\leftarrow$");
-  content = content.replace(/->/g, "$\\rightarrow$");
-  content = content.replace(/>/g, "\\textgreater{} ");
-  content = content.replace(/</g, "\\textless{} ");
+  content = content.replace(cloneRegex(patterns.percent), "\\% ");
+  content = content.replace(cloneRegex(patterns.and), "\\& ");
+  content = content.replace(cloneRegex(patterns.exp), "\\^ ");
+  content = content.replace(cloneRegex(patterns.underscore), "\\_ ");
+  content = content.replace(cloneRegex(patterns.braceOpen), "\\{ ");
+  content = content.replace(cloneRegex(patterns.braceClose), "\\} ");
+  content = content.replace(cloneRegex(patterns.approx), "\\approx ");
+  content = content.replace(cloneRegex(patterns.nEq), "$\\neq$");
+  content = content.replace(cloneRegex(patterns.therefore), "$\\Rightarrow$");
+  content = content.replace(cloneRegex(patterns.leq), "$\\leq$");
+  content = content.replace(cloneRegex(patterns.geq), "$\\geq$");
+  content = content.replace(cloneRegex(patterns.arrowLeft), "$\\leftarrow$");
+  content = content.replace(cloneRegex(patterns.arrowRight), "$\\rightarrow$");
+  content = content.replace(cloneRegex(patterns.greater), "\\textgreater{} ");
+  content = content.replace(cloneRegex(patterns.smaller), "\\textless{} ");
   return content;
 }
 
 function replaceSymbolsHashtag(content) {
-  content = content.replace(/#cnts/, "\\tableofcontents");
-  content = content.replace(/#imgs/, "\\listoffigures");
-  content = content.replace(/#tbs/, "\\listoftables");
-  content = content.replace(/#refs/, "\\nocite{*}\n\\printbibliography");
-  content = content.replace(/#avoid/g, "\\thispagestyle{empty}");
-  content = content.replace(/#break/g, "\\cleardoublepage");
+  content = content.replace(cloneRegex(patterns.cnts), "\\tableofcontents");
+  content = content.replace(cloneRegex(patterns.imgs), "\\listoffigures");
+  content = content.replace(cloneRegex(patterns.tbs), "\\listoftables");
+  content = content.replace(
+    cloneRegex(patterns.refs),
+    "\\nocite{*}\n\\printbibliography"
+  );
+  content = content.replace(
+    cloneRegex(patterns.avoid),
+    "\\thispagestyle{empty}"
+  );
+  content = content.replace(cloneRegex(patterns.break), "\\cleardoublepage");
   return content;
 }
 
 function replaceLayoutHashtag(content) {
-  content = content.replace(/#uh\s+(.*)#/gu, (match, content) => {
+  content = content.replace(cloneRegex(patterns.uh), (match, content) => {
     return `\\uncountSection{${content}}`;
   });
 
-  content = content.replace(/#h1\s+(.*)#/gu, (match, content) => {
+  content = content.replace(cloneRegex(patterns.h1), (match, content) => {
     return `\\heading{${content}}`;
   });
 
-  content = content.replace(/#h2\s+(.*)#/gu, (match, content) => {
+  content = content.replace(cloneRegex(patterns.h2), (match, content) => {
     return `\\subheading{${content}}`;
   });
 
-  content = content.replace(/#h3\s+(.*)#/gu, (match, content) => {
+  content = content.replace(cloneRegex(patterns.h3), (match, content) => {
     return `\\subsubheading{${content}}`;
   });
 
-  content = content.replace(/#b\s+(.*)#/gu, (match, content) => {
+  content = content.replace(cloneRegex(patterns.biu), (match, content) => {
+    return `\\textbf{\\textit{\\underline{${content}}}}`;
+  });
+
+  content = content.replace(cloneRegex(patterns.bi), (match, content) => {
+    return `\\textbf{\\textit{${content}}}`;
+  });
+
+  content = content.replace(cloneRegex(patterns.bu), (match, content) => {
+    return `\\textbf{\\underline{${content}}}`;
+  });
+
+  content = content.replace(cloneRegex(patterns.iu), (match, content) => {
+    return `\\textit{\\underline{${content}}}`;
+  });
+
+  content = content.replace(cloneRegex(patterns.b), (match, content) => {
     return `\\textbf{${content}}`;
   });
 
-  content = content.replace(/#u\s+(.*)#/gu, (match, content) => {
+  content = content.replace(cloneRegex(patterns.u), (match, content) => {
     return `\\underline{${content}}`;
   });
 
-  content = content.replace(/#i\s+(.*)#/gu, (match, content) => {
+  content = content.replace(cloneRegex(patterns.i), (match, content) => {
     return `\\textit{${content}}`;
   });
 
-  content = content.replace(
-    /#(?:(?:bi)|(?:ib))\s+(.*?)#/gu,
-    (match, content) => {
-      return `\\textbf{\\textit{${content}}}`;
-    }
-  );
+  content = content.replace(cloneRegex(patterns.c), (match, content) => {
+    return `\\begin{center}\n${content}\n\\end{center}`;
+  });
 
-  content = content.replace(
-    /#(?:(?:bu)|(?:ub))\s+(.*?)#/gu,
-    (match, content) => {
-      return `\\textbf{\\underline{${content}}}`;
-    }
-  );
-
-  content = content.replace(
-    /#(?:(?:iu)|(?:ui))\s+(.*?)#/gu,
-    (match, content) => {
-      return `\\textit{\\underline{${content}}}`;
-    }
-  );
-
-  content = content.replace(
-    /#(?:(?:biu)|(?:bui)|(?:ibu)|(?:iub)|(?:uib)|(?:ubi))\s+(.*?)#/gu,
-    (match, content) => {
-      return `\\textbf{\\textit{\\underline{${content}}}}`;
-    }
-  );
-
-  content = content.replace(/#c\s+(.*)#/gu, (match, content) => {
-    return `\\begin{center} ${content} \\end{center}`;
+  content = content.replace(cloneRegex(patterns.r), (match, content) => {
+    return `\\begin{flushright}\n${content}\n\\end{flushright}`;
   });
 
   content = content.replace(
-    /#img\s*\n\$(.*?)\n\$(.*?)\n#?/gu,
+    cloneRegex(patterns.imgc),
     (match, link, caption) => {
       return `\\begin{figure}[H]
       \\centering
@@ -103,7 +101,7 @@ function replaceLayoutHashtag(content) {
     }
   );
 
-  content = content.replace(/#img\s*\n\$(.*?)\n#?/gu, (match, link) => {
+  content = content.replace(cloneRegex(patterns.img), (match, link) => {
     return `\\begin{figure}[H]
       \\centering
       \\includegraphics[width=0.5\\textwidth]{${link}}
@@ -111,7 +109,7 @@ function replaceLayoutHashtag(content) {
   });
 
   content = content.replace(
-    /#header\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#?/gu,
+    cloneRegex(patterns.header),
     (match, left, right, center) => {
       return `\\pagestyle{fancy}
   \\fancyhead[L]{${left}}
@@ -122,7 +120,7 @@ function replaceLayoutHashtag(content) {
   );
 
   content = content.replace(
-    /#footer\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#?/gu,
+    cloneRegex(patterns.footer),
     (match, left, right, center) => {
       return `\\pagestyle{fancy}
   \\fancyfoot[L]{${left}}
@@ -166,11 +164,11 @@ function replaceListHashtag(content) {
     return result;
   }
 
-  content = content.replace(/#ul\s*\n(.*?)\n#/gsu, (match, content) =>
+  content = content.replace(cloneRegex(patterns.ul), (match, content) =>
     coreProcess(content, "itemize")
   );
 
-  content = content.replace(/#cl\s*\n(.*?)\n#/gsu, (match, content) =>
+  content = content.replace(cloneRegex(patterns.cl), (match, content) =>
     coreProcess(content, "enumerate")
   );
   return content;
@@ -212,12 +210,12 @@ function replaceTableHashtag(content) {
   }
 
   content = content.replace(
-    /#tb\s*\n(.*?)\n\$(.*?)\n?#/gsu,
+    cloneRegex(patterns.tbc),
     (match, content, caption) =>
       getTable(match, content, `\\caption[${caption}]{${caption}}\n`)
   );
 
-  content = content.replace(/#tb\s*\n(.*?)\n#/gsu, (match, content) =>
+  content = content.replace(cloneRegex(patterns.tb), (match, content) =>
     getTable(match, content, "")
   );
 
@@ -225,10 +223,8 @@ function replaceTableHashtag(content) {
 }
 
 function replaceTitlepageHashtag(content) {
-  const regexPersonal =
-    /#titlepage-personal\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#?/su;
-  const regexGroup =
-    /#titlepage-group\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#?/su;
+  const regexPersonal = cloneRegex(patterns.titlepagePersonal);
+  const regexGroup = cloneRegex(patterns.titlepageGroup);
 
   if (regexPersonal.test(content)) {
     let titlepageContent = content.match(regexPersonal)[0];
@@ -396,11 +392,9 @@ function replaceTitlepageHashtag(content) {
 
 function replaceRefHashtag(content) {
   let prefContent = "";
-  const bookRegex = /#book\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#?/gsu;
-  const webpageRegex =
-    /#webpage\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#?/gsu;
-  const thesisRegex =
-    /#thesis\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#?/gsu;
+  const bookRegex = cloneRegex(patterns.book);
+  const webpageRegex = cloneRegex(patterns.webpage);
+  const thesisRegex = cloneRegex(patterns.thesis);
 
   if (bookRegex.test(content)) {
     bookRegex.lastIndex = 0;
@@ -492,20 +486,20 @@ function mainProcess(content) {
     prefContent;
 
   // Hiding environments
-  const codeMatches = [
-    ...mainContent.matchAll(/#code\s*\n*(.*?)\n*#ecode/gsu),
-  ].map((match) => match[1]);
-  mainContent = mainContent.replace(/#code\s*\n*(.*?)\n*#ecode/gsu, "@code");
+  const codeMatches = [...mainContent.matchAll(cloneRegex(patterns.code))].map(
+    (match) => match[1]
+  );
+  mainContent = mainContent.replace(cloneRegex(patterns.code), "@code");
 
   mainContent = replaceRepropcess(mainContent);
 
   [titlepageContent, mainContent] = replaceTitlepageHashtag(mainContent);
   [prefContent, mainContent] = replaceRefHashtag(mainContent);
 
-  const mathMatches = [
-    ...mainContent.matchAll(/#math\n*(.*?)\n*#emath/gsu),
-  ].map((match) => match[1]);
-  mainContent = mainContent.replace(/#math\n*(.*?)\n*#emath/gsu, "@math");
+  const mathMatches = [...mainContent.matchAll(cloneRegex(patterns.math))].map(
+    (match) => match[1]
+  );
+  mainContent = mainContent.replace(cloneRegex(patterns.math), "@math");
 
   mainContent = mainContent.replace(/\\#/g, "@sharp");
   mainContent = mainContent.replace(/\\\$/g, "@dolar");
