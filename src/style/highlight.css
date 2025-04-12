@@ -13,22 +13,26 @@
 .sharptex-h1 {
   width: 100%;
   display: inline-block;
-  font-size: 2em;
+  font-size: 1.6em;
   margin: 0.5em 0;
+  font-weight: bold;
 }
 
 .sharptex-h2 {
   width: 100%;
   display: inline-block;
-  font-size: 1.5em;
+  font-size: 1.3em;
   margin: 0.3em 0;
+  font-weight: bold;
 }
 
 .sharptex-h3 {
   width: 100%;
   display: inline-block;
-  font-size: 1.3em;
+  font-size: 1.2em;
   margin: 0.1em 0;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .sharptex-center {

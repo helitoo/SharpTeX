@@ -46,25 +46,20 @@
                     "\n"
                   );
 
-                  const regexMap = [
-                    { regex: /!!(.*?)!!/g, className: "highlight" },
-                    { regex: /\*\*(.*?)\*\*/g, className: "highlight" },
-                    { regex: /__(.*?)__/g, className: "highlight" },
-                  ];
-
-                  for (const { regex, className } of regexMap) {
+                  function highlight(regex, highlightType) {
                     let match;
                     while ((match = regex.exec(docText)) !== null) {
                       const start = match.index;
                       const end = start + match[0].length;
-
                       decorations.push(
                         Decoration.inline(start + 1, end + 1, {
-                          class: className,
+                          class: highlightType,
                         })
                       );
                     }
                   }
+
+                  highlight(/!!(.*?)!!/g, "highlight");
 
                   return DecorationSet.create(newState.doc, decorations);
                 },

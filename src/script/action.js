@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const saveButton = document.getElementById("saveButton");
   const exportButton = document.getElementById("exportButton");
   const fileName = document.getElementById("fileName");
-  let page = document.getElementById("page");
 
   //==========================
   // Event import file
@@ -31,9 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
       // set contain
       const reader = new FileReader();
       reader.onload = function (e) {
-        page.value = e.target.result;
+        page.commands.setContent(
+          e.target.result
+            .split(/\r?\n/)
+            .map((line) =>
+              line.trim() === "" ? "<p><br></p>" : `<p>${line}</p>`
+            )
+            .join("")
+        );
         // Activate event input to count char and line
-        page.dispatchEvent(new Event("input"));
+        // page.dispatchEvent(new Event("input"));
       };
 
       reader.readAsText(file);
@@ -69,9 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   saveButton.addEventListener("click", async () => {
     if (window.showSaveFilePicker) {
-      saveAs(fileName.value, page.value);
+      saveAs(fileName.value, getText(page.state.doc));
     } else {
-      download(fileName, new Blob([page.value], { type: "text/plain" }));
+      download(
+        fileName.value,
+        new Blob([getText(page.state.doc)], { type: "text/plain" })
+      );
     }
   });
 
@@ -82,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       // Conver to tex
       const [mainContent, titlepageContent, prefContent] = mainProcess(
-        page.value
+        getText(page.state.doc)
       );
 
       // Create zip object
@@ -246,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       download(
-        fileName + "-project.zip",
+        fileName.value + "-project.zip",
         await zip.generateAsync({ type: "blob" })
       );
     } catch (error) {

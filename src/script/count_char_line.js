@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
   // Get page
   const page = document.getElementById("page");
   const pChar = document.getElementById("char");
@@ -10,4 +10,4 @@ document.addEventListener("DOMContentLoaded", () => {
     let lines = page.value.match(/\n/g);
     pLine.innerText = (lines ? lines.length : 0) + 1;
   });
-});
+});*/

@@ -5,7 +5,7 @@
 function replaceRepropcess(content) {
   content = content.replace(cloneRegex(patterns.percent), "\\% ");
   content = content.replace(cloneRegex(patterns.and), "\\& ");
-  content = content.replace(cloneRegex(patterns.exp), "\\^ ");
+  content = content.replace(cloneRegex(patterns.exp), "\\^{} ");
   content = content.replace(cloneRegex(patterns.underscore), "\\_ ");
   content = content.replace(cloneRegex(patterns.braceOpen), "\\{ ");
   content = content.replace(cloneRegex(patterns.braceClose), "\\} ");
@@ -38,22 +38,6 @@ function replaceSymbolsHashtag(content) {
 }
 
 function replaceLayoutHashtag(content) {
-  content = content.replace(cloneRegex(patterns.uh), (match, content) => {
-    return `\\uncountSection{${content}}`;
-  });
-
-  content = content.replace(cloneRegex(patterns.h1), (match, content) => {
-    return `\\heading{${content}}`;
-  });
-
-  content = content.replace(cloneRegex(patterns.h2), (match, content) => {
-    return `\\subheading{${content}}`;
-  });
-
-  content = content.replace(cloneRegex(patterns.h3), (match, content) => {
-    return `\\subsubheading{${content}}`;
-  });
-
   content = content.replace(cloneRegex(patterns.biu), (match, content) => {
     return `\\textbf{\\textit{\\underline{${content}}}}`;
   });
@@ -80,6 +64,22 @@ function replaceLayoutHashtag(content) {
 
   content = content.replace(cloneRegex(patterns.i), (match, content) => {
     return `\\textit{${content}}`;
+  });
+
+  content = content.replace(cloneRegex(patterns.uh), (match, content) => {
+    return `\\uncountSection{${content}}`;
+  });
+
+  content = content.replace(cloneRegex(patterns.h1), (match, content) => {
+    return `\\heading{${content}}`;
+  });
+
+  content = content.replace(cloneRegex(patterns.h2), (match, content) => {
+    return `\\subheading{${content}}`;
+  });
+
+  content = content.replace(cloneRegex(patterns.h3), (match, content) => {
+    return `\\subsubheading{${content}}`;
   });
 
   content = content.replace(cloneRegex(patterns.c), (match, content) => {
@@ -511,6 +511,10 @@ function mainProcess(content) {
   mainContent = replaceLayoutHashtag(mainContent);
   mainContent = replaceListHashtag(mainContent);
   mainContent = replaceTableHashtag(mainContent);
+
+  // Fix redundance
+  mainContent = mainContent.replace(/#/g, "\\#");
+  mainContent = mainContent.replace(/\$/g, "\\$");
 
   // Restore environments
 

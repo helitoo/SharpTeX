@@ -22,6 +22,10 @@
     <!-- Local script -->
     <script src="./src/script/loading.js"></script>
     <script src="./src/script/sharptex_engine/prepare.js"></script>
+    <script
+      type="module"
+      src="./src/script/sharptex_engine/highlight.js"
+    ></script>
     <script src="./src/script/sharptex_engine/parse.js"></script>
     <script src="./src/script/shortcuts.js"></script>
     <script src="./src/script/dropdown_menu_engine.js"></script>
@@ -137,10 +141,10 @@ $TP. Hồ Chí Minh, 03/2025
             >
           </div>
         </div>
-        <div class="tooltipContainer">
+        <!-- <div class="tooltipContainer">
           <input id="findReplaceButton" type="button" value="Tìm & thay" />
           <span class="tooltip">[Ctrl H]</span>
-        </div>
+        </div> -->
         <div class="tooltipContainer">
           <input
             id="documentButton"
@@ -185,15 +189,13 @@ $TP. Hồ Chí Minh, 03/2025
         </div>
       </div>
     </div>
-    <div class="page">
-      <div class="pageInfor">
-        <p id="char" class="noCopy">0</p>
-        <p class="noCopy">ký tự.</p>
-        <p id="line" class="noCopy">1</p>
-        <p class="noCopy">dòng.</p>
-      </div>
-      <hr />
-      <textarea name="page" id="page" spellcheck="false"></textarea>
+    <div class="page"></div>
+    <!-- <div class="pageInfor">
+      <p id="char" class="noCopy">0</p>
+      <p class="noCopy">ký tự.</p>
+      <p id="line" class="noCopy">1</p>
+      <p class="noCopy">dòng.</p>
     </div>
+    <hr /> -->
   </body>
 </html>

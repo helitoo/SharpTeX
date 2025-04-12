@@ -1,10 +1,11 @@
+/*
+
 document.addEventListener("DOMContentLoaded", function () {
   //===================================
   // Get pattern and replacement
   //===================================
 
-  let page = document.getElementById("page"),
-    currentIndex,
+  let currentIndex,
     matches = [],
     pattern,
     replacement;
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
       modifiers += "i";
     }
     pattern = new RegExp(string, modifiers);
-    matches = [...page.value.matchAll(pattern)];
+    matches = [...page.state.doc.textContent.matchAll(pattern)];
     currentIndex = 0;
   });
 
@@ -28,8 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
     replacement = this.value;
   });
 
-  page.addEventListener("input", function () {
-    matches = [...page.value.matchAll(pattern)]; // The content was changed by hand by user
+  page.on("update", function () {
+    matches = [...page.state.doc.textContent.matchAll(pattern)]; // The content was changed by hand by user
     if (matches.length > 0) {
       currentIndex = Math.min(
         Math.max(currentIndex - 1, 0),
@@ -45,11 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
       let end = start + matches[currentIndex][0].length;
 
       // Highlighting
-      page.focus();
-      page.setSelectionRange(start, end);
-      let lineHeight = 20;
-      let position = page.scrollHeight * (start / page.value.length);
-      page.scrollTop = position - lineHeight * 2;
+      page.commands.setTextSelection({ from: start, to: end });
+      page.commands.focus();
     }
   }
 
@@ -97,10 +95,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (matches.length == 0) {
       alert("Không tìm thấy!");
     } else {
-      page.value = page.value.replace(pattern, replacement);
+      page.commands.setContent(
+        page.state.doc.textContent.replace(pattern, replacement)
+      );
       alert("Đã thay thế toàn bộ!");
     }
-    matches = [...page.value.matchAll(pattern)];
+    matches = [...page.state.doc.textContent.matchAll(pattern)];
   });
 
   // Event replace one time
@@ -114,12 +114,13 @@ document.addEventListener("DOMContentLoaded", function () {
       let start = match.index;
       let end = start + match[0].length;
 
-      page.value =
-        page.value.substring(0, start) +
-        replacement +
-        page.value.substring(end);
+      page.commands.setContent(
+        page.state.doc.textContent.substring(0, start) +
+          replacement +
+          page.state.doc.textContent.substring(end)
+      );
 
-      matches = [...page.value.matchAll(pattern)]; // Update matches after replace
+      matches = [...page.state.doc.textContent.matchAll(pattern)]; // Update matches after replace
 
       if (matches.length > 0) {
         currentIndex = Math.min(currentIndex, matches.length - 1);
@@ -128,3 +129,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+*/
