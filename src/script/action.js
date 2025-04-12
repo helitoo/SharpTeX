@@ -30,14 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // set contain
       const reader = new FileReader();
       reader.onload = function (e) {
-        page.commands.setContent(
-          e.target.result
-            .split(/\r?\n/)
-            .map((line) =>
-              line.trim() === "" ? "<p><br></p>" : `<p>${line}</p>`
-            )
-            .join("")
-        );
+        toPage(e.target.result);
         // Activate event input to count char and line
         // page.dispatchEvent(new Event("input"));
       };

@@ -19,19 +19,15 @@ function hindDropdown(event) {
 }
 
 function insertToBeginOfPage(text) {
-  let page = document.getElementById("page");
-
-  page.value = text + page.value;
+  toPage(text + getText(page.state.doc));
 
   // Activate event input to count char and line
-  page.dispatchEvent(new Event("input"));
+  // page.dispatchEvent(new Event("input"));
 }
 
 function insertToEndOfPage(text) {
-  let page = document.getElementById("page");
-
-  page.value += text;
+  toPage(getText(page.state.doc) + text);
 
   // Activate event input to count char and line
-  page.dispatchEvent(new Event("input"));
+  // page.dispatchEvent(new Event("input"));
 }

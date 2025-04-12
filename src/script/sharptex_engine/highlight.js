@@ -91,6 +91,15 @@ window.page = new Editor({
   //content: "<p>Hello World!</p>",
 });
 
+window.toPage = function (text) {
+  page.commands.setContent(
+    text
+      .split(/\r?\n/)
+      .map((line) => (line.trim() === "" ? "<p><br></p>" : `<p>${line}</p>`))
+      .join("")
+  );
+};
+
 window.getText = function (doc) {
   let text = "";
 
