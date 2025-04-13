@@ -72,5 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // When the window was loaded
+  //resetPageLoad();
   window.addEventListener("load", triggerPageLoad);
 });

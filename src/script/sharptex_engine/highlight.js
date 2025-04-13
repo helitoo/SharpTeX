@@ -118,7 +118,7 @@ window.getText = function (doc) {
       text += "\n";
     }
 
-    if (node.isTextblock && node !== doc.lastChild) {
+    if (node.isTextblock) {
       text += "\n";
     }
   });
