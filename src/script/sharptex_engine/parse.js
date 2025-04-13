@@ -323,7 +323,7 @@ function replaceTitlepageHashtag(content) {
     content = content.replace(regexGroup, "");
 
     // Convert table
-
+    group = removeEmptyLines(group);
     let convertedTable = "";
     let lines = group.split("\n");
     group = lines[0]; // Now the variable group contains the name of group
