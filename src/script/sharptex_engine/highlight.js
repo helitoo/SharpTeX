@@ -107,23 +107,12 @@ window.getText = function (doc) {
   doc.descendants((node, pos, parent) => {
     if (node.isText) {
       text += node.text;
-    }
-
-    if (
-      node.isBlock &&
-      !node.isTextblock &&
-      parent &&
-      parent.type.name === "doc"
-    ) {
-      text += "\n";
-    }
-
-    if (node.isTextblock) {
+    } else {
       text += "\n";
     }
   });
 
-  return text.trim();
+  return text;
 };
 
 document.querySelector(".ProseMirror").setAttribute("spellcheck", "false");
