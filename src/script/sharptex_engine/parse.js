@@ -1,3 +1,7 @@
+function removeEmptyLines(content) {
+  return content.replace(/^\s+/gmu, "");
+}
+
 //////////////////////////////////////////////
 //  Normal format
 //////////////////////////////////////////////
@@ -135,6 +139,8 @@ function replaceLayoutHashtag(content) {
 
 function replaceListHashtag(content) {
   function coreProcess(content, typeOfList) {
+    content = removeEmptyLines(content);
+
     let lines = content.split("\n");
     let bodies = []; // Get each lines after remove $
     let levels = []; // Get number of $ on each line
@@ -176,6 +182,8 @@ function replaceListHashtag(content) {
 
 function replaceTableHashtag(content) {
   function getTable(match, content, caption) {
+    content = removeEmptyLines(content);
+
     // Make declaration
     let lines = content.split("\n");
     let result =

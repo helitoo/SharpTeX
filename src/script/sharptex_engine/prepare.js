@@ -1,5 +1,5 @@
 const patterns = {
-  key: /(?:#code|#ecode|#math|#emath|#cnts|#imgs|#tbs|#refs|#avoid|#break|#header|#footer|#ul|#cl|#tb|#titlepage-personal|titlepage-group|#book|#webpage|#thesis)/g,
+  key: /(?:#code|#ecode|#math|#emath|#cnts|#imgs|#tbs|#refs|#avoid|#break|#header|#footer|#ul|#cl|#tb|#titlepage-personal|#titlepage-group|#book|#webpage|#thesis)/g,
   code: /#code\s*(.*?)\s*#ecode/gsu,
   math: /#math\s*(.*?)\s*#emath/gsu,
   url: /\b(?:https?|ftp):\/\/(?:www\.)?[a-zA-Z0-9\-._~%]+(?:\.[a-zA-Z]{2,})+(?:\/[^\s]*)?/g,
@@ -47,12 +47,14 @@ const patterns = {
   tbc: /#tb\s*\n(.*?)\n\$(.*?)\n*#/gsu,
   tb: /#tb\s*\n(.*?)\n#/gsu,
   titlepagePersonal:
-    /#titlepage-personal\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#?/su,
+    /#titlepage-personal\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*#/su,
   titlepageGroup:
-    /#titlepage-group\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#?/su,
-  book: /#book\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#*/gsu,
-  webpage: /#webpage\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#*/gsu,
-  thesis: /#thesis\s*\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n\$(.*?)\n#*/gsu,
+    /#titlepage-group\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*#/su,
+  book: /#book\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*#/gsu,
+  webpage:
+    /#webpage\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*#/gsu,
+  thesis:
+    /#thesis\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*\$\s*(.*?)\s*#/gsu,
 };
 
 function cloneRegex(regex) {

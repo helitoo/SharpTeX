@@ -107,10 +107,13 @@ window.getText = function (doc) {
   doc.descendants((node, pos, parent) => {
     if (node.isText) {
       text += node.text;
-    } else {
-      text += "\n";
     }
+    text += "\n";
   });
+
+  function removeEmptyLines(content) {
+    return content.replace(/^\s+/gmu, "");
+  }
 
   return text;
 };
