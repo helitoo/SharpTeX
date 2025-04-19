@@ -207,7 +207,7 @@ function replaceTableHashtag(content) {
 
     // Make body
     l = lines.length;
-    for (let i = 1; i < l; i++) {
+    for (let i = 1; i < l - 1; i++) {
       result += lines[i].split(";").join("&") + "\\\\\n\\hline\n";
     }
 
