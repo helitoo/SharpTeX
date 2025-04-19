@@ -1,5 +1,4 @@
 const patterns = {
-  key: /(?:#code|#ecode|#math|#emath|#cnts|#imgs|#tbs|#refs|#avoid|#break|#header|#footer|#ul|#cl|#tb|#titlepage-personal|#titlepage-group|#book|#webpage|#thesis)/g,
   code: /#code\s*(.*?)\s*#ecode/gsu,
   math: /#math\s*(.*?)\s*#emath/gsu,
   url: /\b(?:https?|ftp):\/\/(?:www\.)?[a-zA-Z0-9\-._~%]+(?:\.[a-zA-Z]{2,})+(?:\/[^\s]*)?/g,

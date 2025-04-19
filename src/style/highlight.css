@@ -47,6 +47,14 @@
   text-align: right;
 }
 
-.sharptex-key {
-  color: #aeaeae;
+.sharptex-green {
+  background-color: rgb(204, 255, 204);
+}
+
+.sharptex-blue {
+  background-color: rgb(212, 212, 255);
+}
+
+.sharptex-grey {
+  color: rgb(224, 224, 224);
 }

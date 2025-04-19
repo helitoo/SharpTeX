@@ -69,7 +69,12 @@ const sharptexHighlighter = Extension.create({
             highlight(cloneRegex(patterns.h3), "sharptex-h3");
             highlight(cloneRegex(patterns.c), "sharptex-center");
             highlight(cloneRegex(patterns.r), "sharptex-right");
-            highlight(cloneRegex(patterns.key), "sharptex-key sharptex-bold");
+            highlight(/;/g, "sharptex-bold sharptex-blue");
+            highlight(/(?:#|\$)/g, "sharptex-bold sharptex-green");
+            highlight(
+              /(?:#code|#ecode|#math|#emath|#cnts|#imgs|#tbs|#refs|#avoid|#break|#header|#footer|#ul|#cl|#tb|#titlepage-personal|#titlepage-group|#book|#webpage|#thesis)/g,
+              "sharptex-bold sharptex-green"
+            );
 
             return DecorationSet.create(newState.doc, decorations);
           },

@@ -197,17 +197,19 @@ function replaceTableHashtag(content) {
     let headerCells = lines[0].split(";");
     let l = headerCells.length;
     for (let i = 0; i < l; i++) {
+      headerCells[i].replace("\\\\", "\\newline");
       if (i == 0) {
-        result += `\\multicolumn{1}{|c|}{\\textbf{${headerCells[i]}}}`;
+        result += `\\multicolumn{1}{|c|}{\\textbf{${headerCells[i]}}}\n`;
       } else {
-        result += `&\\multicolumn{1}{c|}{\\textbf{${headerCells[i]}}}`;
+        result += `&\\multicolumn{1}{c|}{\\textbf{${headerCells[i]}}}\n`;
       }
     }
     result += "\\\\\n\\hline\n";
 
     // Make body
-    l = lines.length;
-    for (let i = 1; i < l - 1; i++) {
+    l = lines.length - 1;
+    for (let i = 1; i < l; i++) {
+      lines[i].replace("\\\\", "\\newline");
       result += lines[i].split(";").join("&") + "\\\\\n\\hline\n";
     }
 
