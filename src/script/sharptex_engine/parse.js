@@ -99,7 +99,7 @@ function replaceLayoutHashtag(content) {
     (match, link, caption) => {
       return `\\begin{figure}[H]
       \\centering
-      \\includegraphics[width=0.5\\textwidth]{${link}}
+      \\includegraphics[width=0.6\\textwidth]{${link}}
       \\caption{\\fontsize{12pt}{0pt}\\selectfont{${caption}}}
   \\end{figure}`;
     }
@@ -108,7 +108,7 @@ function replaceLayoutHashtag(content) {
   content = content.replace(cloneRegex(patterns.img), (match, link) => {
     return `\\begin{figure}[H]
       \\centering
-      \\includegraphics[width=0.5\\textwidth]{${link}}
+      \\includegraphics[width=0.6\\textwidth]{${link}}
   \\end{figure}`;
   });
 

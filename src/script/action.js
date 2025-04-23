@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const importButton = document.getElementById("importButton");
   const saveButton = document.getElementById("saveButton");
   const exportButton = document.getElementById("exportButton");
+  const convertButton = document.getElementById("convertButton");
   const fileName = document.getElementById("fileName");
 
   //==========================
@@ -75,6 +76,23 @@ document.addEventListener("DOMContentLoaded", () => {
         new Blob([getText(page.state.doc)], { type: "text/plain" })
       );
     }
+  });
+
+  //==========================
+  // Event convert file
+  //==========================
+  convertButton.addEventListener("click", () => {
+    const [mainContent, titlepageContent, prefContent] = mainProcess(
+      getText(page.state.doc)
+    );
+    navigator.clipboard
+      .writeText(mainContent)
+      .then(() => {
+        alert("Đã copy vào clipboard!");
+      })
+      .catch((err) => {
+        alert(err);
+      });
   });
 
   //==========================
