@@ -37,7 +37,7 @@ function replaceSymbolsHashtag(content) {
     cloneRegex(patterns.avoid),
     "\\thispagestyle{empty}"
   );
-  content = content.replace(cloneRegex(patterns.break), "\\cleardoublepage");
+  content = content.replace(cloneRegex(patterns.break), "\\clearpage");
   return content;
 }
 
