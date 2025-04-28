@@ -42,6 +42,10 @@ function replaceSymbolsHashtag(content) {
 }
 
 function replaceLayoutHashtag(content) {
+  content = content.replace(cloneRegex(patterns.quote), (match, content) => {
+    return `\\enquote{${content}}`;
+  });
+
   content = content.replace(cloneRegex(patterns.biu), (match, content) => {
     return `\\textbf{\\textit{\\underline{${content}}}}`;
   });
@@ -70,11 +74,18 @@ function replaceLayoutHashtag(content) {
     return `\\textit{${content}}`;
   });
 
+  content = content.replace(cloneRegex(patterns.ph), (match, content) => {
+    content = content.toUpperCase();
+    return `\\pseudoHeading{${content}}`;
+  });
+
   content = content.replace(cloneRegex(patterns.uh), (match, content) => {
-    return `\\uncountSection{${content}}`;
+    content = content.toUpperCase();
+    return `\\uncountHeading{${content}}`;
   });
 
   content = content.replace(cloneRegex(patterns.h1), (match, content) => {
+    content = content.toUpperCase();
     return `\\heading{${content}}`;
   });
 
@@ -265,23 +276,26 @@ function replaceTitlepageHashtag(content) {
             rectangle
             ($ (current page.south east) + (-2.1cm, 2.6cm) $);
             \\end{tikzpicture}
-    
+        
+        \\vspace{-0.7cm}
         \\centering
         \\textbf{${school}}\\\\
         
-        \\vspace{1cm}
+        \\vspace{0.7cm}
         \\includegraphics[width=0.2\\textwidth]{${logo}}\\\\
-        \\vspace{1cm}
+        \\vspace{0.7cm}
         \\Large
         \\textbf{${thesis}}\\\\
     
         \\begin{center}
         Đề tài\\\\
             \\begin{minipage}[c][3\\baselineskip][c]{0.8\\textwidth}
-                \\centering \\textbf{${topic}}
+                \\setstretch{0.95}
+                \\centering
+                \\textbf{${topic}}
             \\end{minipage}
         \\end{center}
-    
+        \\vspace{-0.7cm}
         \\justifying \\normalsize  
         \\begin{table}[h]
             \\centering
@@ -349,20 +363,23 @@ function replaceTitlepageHashtag(content) {
             rectangle
             ($ (current page.south east) + (-2.1cm, 2.6cm) $);
             \\end{tikzpicture}
-    
+      
+        \\vspace(-0.7cm)
         \\centering
         \\textbf{${school}}\\\\
         
-        \\vspace{1cm}
+        \\vspace{0.7cm}
         \\includegraphics[width=0.2\\textwidth]{${logo}}\\\\
-        \\vspace{1cm}
+        \\vspace{0.7cm}
         \\Large
         \\textbf{${thesis}}\\\\
     
         \\begin{center}
         Đề tài\\\\
             \\begin{minipage}[c][3\\baselineskip][c]{0.8\\textwidth}
-                \\centering \\textbf{${topic}}
+                \\setstretch{0.95}
+                \\centering
+                \\textbf{${topic}}
             \\end{minipage}
         \\end{center}
         \\vspace{-0.7cm}
@@ -375,7 +392,7 @@ function replaceTitlepageHashtag(content) {
                 \\textbf{\\textit{Nhóm sinh viên thực hiện:}}&${group}\\\\
             \\end{tabular}
         \\end{table}
-        \\vspace{-0.8cm}
+        \\vspace{-0.5cm}
         \\begin{table}[h]
             \\centering
             \\begin{tabular}{l l l}

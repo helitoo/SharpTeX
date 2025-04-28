@@ -63,6 +63,7 @@ const sharptexHighlighter = Extension.create({
             highlight(cloneRegex(patterns.b), "sharptex-bold");
             highlight(cloneRegex(patterns.i), "sharptex-italic");
             highlight(cloneRegex(patterns.u), "sharptex-underline");
+            highlight(cloneRegex(patterns.ph), "sharptex-h1");
             highlight(cloneRegex(patterns.uh), "sharptex-h1");
             highlight(cloneRegex(patterns.h1), "sharptex-h1");
             highlight(cloneRegex(patterns.h2), "sharptex-h2");
@@ -72,7 +73,7 @@ const sharptexHighlighter = Extension.create({
             highlight(/;/g, "sharptex-bold sharptex-blue");
             highlight(/\$/g, "sharptex-bold sharptex-green");
             highlight(
-              /(?:#code|#ecode|#math|#emath|#cnts|#imgs|#tbs|#refs|#avoid|#break|#header|#footer|#ul|#cl|#tb|#titlepage-personal|#titlepage-group|#book|#webpage|#thesis)/g,
+              /(?:#code|#ecode|#math|#emath|#cnts|#imgs|#tbs|#refs|#avoid|#break|#header|#footer|#ul|#cl|#tb|#img|#titlepage-personal|#titlepage-group|#book|#webpage|#thesis)/g,
               "sharptex-bold sharptex-green"
             );
 
@@ -112,13 +113,10 @@ window.getText = function (doc) {
   doc.descendants((node, pos, parent) => {
     if (node.isText) {
       text += node.text;
+    } else if (node.type.name === "paragraph" || node.type.name === "block") {
+      text += "\n";
     }
-    text += "\n";
   });
-
-  function removeEmptyLines(content) {
-    return content.replace(/^\s+/gmu, "");
-  }
 
   return text;
 };
