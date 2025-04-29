@@ -73,7 +73,7 @@ const sharptexHighlighter = Extension.create({
             highlight(/;/g, "sharptex-bold sharptex-blue");
             highlight(/\$/g, "sharptex-bold sharptex-green");
             highlight(
-              /(?:#code|#ecode|#math|#emath|#cnts|#imgs|#tbs|#refs|#avoid|#break|#header|#footer|#ul|#cl|#tb|#img|#titlepage-personal|#titlepage-group|#book|#webpage|#thesis)/g,
+              /(?:#code|#ecode|#math|#emath|#cnts|#imgs|#tbs|#thank|#refs|#avoid|#break|#header|#footer|#ul|#cl|#tb|#img|#titlepage-personal|#titlepage-group|#book|#webpage|#thesis)/g,
               "sharptex-bold sharptex-green"
             );
 

@@ -22,6 +22,7 @@ const patterns = {
   cnts: /#cnts/,
   imgs: /#imgs/,
   tbs: /#tbs/,
+  thank: /#thank/,
   refs: /#refs/,
   avoid: /#avoid/g,
   break: /#break/g,
