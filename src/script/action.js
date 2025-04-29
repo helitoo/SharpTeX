@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
         \\renewcommand{\\thetable}{\\thesection.\\arabic{table}}
         \\captionsetup[table]{labelsep=space}
         
-        \\newcommand{\\thank}{
+        \\newcommand{\\cmt}{
         \\pseudoHeading{NHẬN XÉT CỦA GIẢNG VIÊN}
         
         \\noindent.............................................................................................................................\\\\

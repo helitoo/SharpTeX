@@ -29,7 +29,7 @@ function replaceSymbolsHashtag(content) {
   content = content.replace(cloneRegex(patterns.cnts), "\\tableofcontents");
   content = content.replace(cloneRegex(patterns.imgs), "\\listoffigures");
   content = content.replace(cloneRegex(patterns.tbs), "\\listoftables");
-  content = content.replace(cloneRegex(patterns.thank), "\\thank");
+  content = content.replace(cloneRegex(patterns.cmt), "\\cmt");
   content = content.replace(cloneRegex(patterns.refs), "\\refs");
   content = content.replace(
     cloneRegex(patterns.avoid),
