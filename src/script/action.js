@@ -271,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         % Table of tables references
         \\newcommand{\\refs}{
-          \\uncountHeading{DANH MỤC TÀI LIỆU THAM KHẢO}
+          \\uncountHeading{TÀI LIỆU THAM KHẢO}
           \\thispagestyle{empty}
           \\nocite{*}
           \\printbibliography[heading=none]
