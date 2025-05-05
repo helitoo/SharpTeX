@@ -115,6 +115,24 @@ document.addEventListener("DOMContentLoaded", () => {
       giftFolder.file(
         "main.tex",
         `
+        \\documentclass{set-up-page}
+
+\\usepackage[backend=biber,style=ieee,sorting=none,style=numeric-comp]{biblatex}
+\\addbibresource{references.bib}
+
+\\begin{document}
+
+
+
+\\input{content}
+
+\\end{document}
+
+`
+      );
+      giftFolder.file(
+        "set-up-page.cls",
+        `
 
 
         \\NeedsTeXFormat{LaTeX2e}
@@ -322,7 +340,6 @@ document.addEventListener("DOMContentLoaded", () => {
         \\end{minipage}
         \\end{flushright}
         }
-        
 
 ` + titlepageContent
       );
